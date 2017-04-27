@@ -58,6 +58,7 @@
 
 % Macros for title, author, abstract, etc.
 \input{preliminaries}
+\input{preamble}
 
 % Add PDF document info fields
 \hypersetup{
@@ -77,6 +78,18 @@
 % even for non-included files.
 %\includeonly{chapter1}
 
+\newcommand{\citel}[1]{\citep{#1}}
+\newcommand{\citelt}[1]{\citet{#1}}
+\newcommand{\ten}[1]{\bm #1}
+
+\def\Tevac{T_{1/2}^{\mbox{\,\scriptsize evac}}}
+\def\Treturn{T_{1/2}^{\mbox{\,\scriptsize return}}}
+\def\toffbar{\bar{t}_{\mbox{\scriptsize off}}}
+\def\toff{{t}_{\mbox{\scriptsize off}}}
+\def\Peclet{P\'{e}clet}
+
+
+
 \begin{document}
 
 % Preliminary pages are always loaded (TOC, CV, etc.)
@@ -84,8 +97,14 @@
 
 % Include the different components of your thesis, in separate files.
 % Using \include allows you to set \includeonly above.
-\include{chapter1}
-%\include{chapter2}
+\include{Abstract}
+\include{Summary}
+\include{Introduction}
+\include{Background}
+\include{Project1}
+\include{Project2}
+\include{Project3}
+\include{timelineofcompletion}
 % ... and so on
 
 % These commands fix an odd problem in which the bibliography line

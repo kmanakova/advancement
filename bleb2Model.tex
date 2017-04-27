@@ -1,0 +1,134 @@
+% !TEX root = bleb.tex
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+Our minimal model, summarized schematically in Fig.~\ref{fig::schematic}, consists of four fundamental dynamic variables, as functions of time $t$ and location on the two-dimensional cell surface, parametrized by $(x_1, x_2)$. The actin cortex, has local height described by $y_C(x_1,x_2,t)$ measured normal to the mean cell surface from its steady-state configuration $y_C=0$, and thickness $c(x_1,x_2,t)$. The cortical-cytoplasmic actin cytoskeleton can in principle have complicated morphologies that cannot be accounted for by a single location $y_C$, so we think of $y_C$ as the weighted average position of maximal cortical actin. Membrane-cortex adhesions are described by density $a(x_1,x_2,t)$ in molecules$/\nm^2$. Finally, the membrane has local height $y_M(x_1,x_2,t)$. {\color{blue} Note that our model is agnostic about the molecular constituents of the membrane, and it could include the plasma membrane as well as permanently membrane-associated proteins and cytoskeletal networks \cite{Kapustina:2013gc}}. Our approach is similar to previous descriptions of membrane mechanics \cite{Alert:2015gz,Lim:2012fz,Allard:2012gy,Peleg:2011fz}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+   \begin{center}
+   \captionsetup{width=8.5cm}
+	\includegraphics*[width=8.5cm]{figs/figure1.pdf}
+      \caption{(A) Micrograph of a single bleb, induced by laser ablation on the surface of a HeLa cell, 43 seconds after initial formation. Taken from \cite{Biro:2013bk}. (B) Model components. At each location on the surface of the cell $x$, four quantities are represented: The height of the membrane $y_M(x,t)$, the height and thickness of the actin cortex $y_C(x,t)$ and $C(x,t)$ respectively, and the local density of membrane-cortex anchoring proteins, $A(x,t)$. Note that the schematic shows the range of possible model states (e.g., thick or thin cortex, protruding or proximal membrane), while specific predicted dynamics will be determined by simulation.}
+      \label{fig::schematic}
+   \end{center}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph{Assembly and turnover.}
+%Cortex
+The cortex is an active, anisotropic poro-viscoelastic material \cite{Salbreux:2009fp,Hannezo:2015ba}. Since the molecular details of cortex assembly are still under investigation \cite{Bovellan:2014ka}, we assume simple first-order kinetics,
+\begin{align}
+\frac{\partial c}{\partial t} &= \omega a - r c. \label{eq::cortexKinetics}
+\end{align}
+The first parameter $\omega$ governs cortex assembly, and assumes new cortex requires adhesion to a nearby membrane (although existing cortex can exist anywhere), consistent with the observation that cortical actin has different architecture than cytoplasmic F-actin \cite{Clark:2013ef}. The second term describes cortex turnover with rate $r \sim 0.05 \s^{-1}$ \cite{Fritzsche:2014jw}. While we use the term thickness, we interpret $c$ as a combination of density and spatial thickness, with fluorescence intensity of labelled F-actin serving as its experimental proxy. Therefore $c$ has arbitrary units.
+
+%Adhesions
+In stereotypical, pre-bleb conditions, the cortex is attached to the membrane via membrane-cortex adhesion molecules including ezrin- radixin- moesin (ERM) family proteins \cite{Fritzsche:2014jw}, as well as any other membrane proteins that interact with F-actin \cite{Paszek:2015it}, therefore we use the generic term ``adhesion" to describe their combined effect. We use similar first-order kinetics for adhesion assembly and turnover, with three additional assumptions: 1) Adhesion assembly saturates at high cortex thickness; 2) Adhesion attachment requires proximity between cortex and membrane, with characteristic distance $\delta$ that describes the ``reach" of adhesion molecules, which may be as large as $\sim100\nm$ \cite{Clark:2013ef}; and 3) Adhesion detachment is force-dependent with characteristic breaking force $f_0$. These assumptions lead to
+\begin{align}
+\frac{\partial a}{\partial t} &=  \frac{\kon\,c}{c_0+c}\; \mbox{exp}\left( - \left(\frac{y_M-y_C}{\delta}\right)\right) - \koff\, a\; \mbox{exp}\left( \frac{\kappa (y_M-y_C)}{f_0}\right) \label{eq::adhesionKinetics}
+\end{align}
+where $\kon$ and $\koff$ have units of $\nm^{-2} \s^{-1}$ and $\s^{-1}$, respectively, and $c_0$ is the cortex thickness at which adhesion assembly is half-maximal. The numerator $\kappa (y_M-y_C)$ follows from the assumption that adhesions collectively behave like springs with Hookean stiffness $\kappa$. Note that adhesion turnover $\koff\sim 2\s^{-1}$ \cite{Fritzsche:2014jw} is significantly faster than cortex turnover, leading to a separation of timescales we exploit.
+
+\paragraph{Mechanics.}
+The above equations describing assembly and disassembly kinetics are coupled to a mechanical description of the membrane and cortex via mechanical energy,
+\begin{align}
+E = \iint&\;   \mathcal{H}_1 + \mathcal{H}_M + \mathcal{H}_C \; dx_1 dx_2 \label{eq::energy}
+\end{align}
+where 
+\begin{align}
+\mathcal{H}_1 &= \frac{1}{2}a\kappa \left(y_M-y_C\right)^2 - \Pi.
+\end{align}
+The first term corresponds to tension on the adhesions. Since these adhesions break at moderate tension, we model these as linear springs. The second term is hydrostatic pressure $\Pi$, specified below. Membrane mechanics are described by
+\begin{align}
+\mathcal{H}_M &= \frac{1}{2}\; \gamma_M \left( \nabla y_M \right)^2 + \frac{1}{2}B_M \left( \nabla^2 y_M \right)^2 
+\end{align}
+corresponding to the standard Canham-Helfrich energy with membrane tension $\gamma_M$ and bending rigidity $B_M$ \cite{Helfrich:1973td,Alert:2015gz,Woolley:2014jm,Lim:2012fz}. These functional forms represent a small-deformation approximation and comprise a simplifying assumption to make the model more easily amenable to the analysis. We therefore do not expect our model to capture the shape of a fully-expanded bleb with high accuracy, for which geometrically more complex models have been developed \cite{Woolley:2015jn}. Finally, mechanics of the actin-myosin cytoskeleton is included in
+\begin{align}
+\mathcal{H}_C &= c\sigma_m \left( y_C^2 + \frac{1}{2}\; w_C \left( \nabla y_C \right)^2 \right), 
+\end{align}
+accounting for active of the cortex, which generates contraction stress $\sigma_m c$, assumed proportional to cortex thickness. The first term accounts for inward contractility, as the cortical cytoskeleton pulls against the cytoplasmic cytoskeleton, generating a normal (inwards) force, {as shown in  Supplemental Fig. 1}. Note this term has been neglected in previous work \cite{Lim:2012fz}. The second term accounts for tangential stress in the plane of the cortex, where $w_C$ is the cortex dimension that translates the 3D contractile stress to a tangential planar contractile tension. Importantly, we find that in traveling blebs, where the cortex is discontinuous, the tangential term does not generate sufficient inward force to heal the tail of the bleb as it travels, highlighting the importance of the normal contractility term. Cortex elasticity terms describing how the cortex resists deformation are straightforward to add, however we find that their omission is sufficient to explain our key results. 
+
+The mechanical features included in the energy Eq.~\ref{eq::energy} can also be understood by their equivalent force-balance form, Eq.~\ref{eq::forceBalanceCortex}-\ref{eq::forceBalanceMembrane} below.
+
+% pressure
+Pressure propagation inside the complex rheology of the cytoplasm is under intense investigation \cite{Charras:2005dm, Strychalski:2013eo, Sedzinski:2011ef}. To address the nature of pressure dynamics, we investigate several pressure model variants. As a base model, we assume pressure is locally relaxed when the membrane is allowed to relax, 
+\begin{equation}
+\Pi = \hat{\Pi}\cdot \left(1 - \frac{y_M}{2 y_M^0} \right)^2 \label{eq::localPressure}
+\end{equation}
+where $y_M^0$ sets the characteristic distance at which pressure is significantly reduced. The pressure drop would be lessened if the membrane is locally water-permeable \cite{Taloni:2015}, which would have the effect of reducing the coefficient relating pressure to membrane extrusion. Other model variants explore the possibility of rapidly-equilibrated pressure across the whole cell surface and a mixture of global and local pressure relaxation.  
+
+% membrane tension
+The dynamics of membrane tension are also under investigation \cite{BenFogelson:2014gx,Peukes:2014fw,Tinevez:2009bh,Weiner:2007gd,Allard:2012if}. Under the simplest assumption, membrane tension $\gamma_M$ is spatially uniform and constant in time. We use this as our base model, but also explore membrane tension that is spatially non-uniform and dynamically responding to local stretching/unruffling and cortex attachment in Results. 
+
+\paragraph{Preliminary analysis.}
+Taking the variational derivative of Eq.~\ref{eq::energy} leads to force-balance equations on the cortex and membrane,
+\begin{align}
+0 &= + a \kappa (y_M-y_C) - \sigma_m c y_C + \sigma_m c\, w_C \nabla^2  y_C \label{eq::forceBalanceCortex}\\
+0 &= - a\kappa (y_M-y_C) + \frac{\delta \hat{\Pi}}{\delta y_M}  + \gamma_M \nabla^2  y_M - \beta\;\nabla^4 y_M \label{eq::forceBalanceMembrane}
+\end{align}
+Physical parameters are summarized in Table~1. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[t!]
+\caption{Model parameters.}\centering \label{tab:par} 
+\begin{tabular}{ c  l  l}
+\hline
+Symbol & Dimensions & Meaning \\
+\hline
+$\omega$ & [A.U.] $\cdot \s^{-1}$ & Cortex assembly rate constant  \\
+$r$ & $\s^{-1} $ & Cortex turnover rate constant \\
+$\kon$ & $\nm^{-2}\s^{-1}$ & Adhesion assembly rate  \\
+$\koff $& $ \s^{-1}$ & Adhesion turnover rate \\
+$c_0$ & [A.U.] & Cortex thickness at adhesion saturation \\
+$\delta$ &  $\nm$& Adhesion length between cortex and membrane \\
+$\kappa$ & $\pN/\nm$ & Adhesion spring constant \\
+$f_0$ & $\pN$ &Adhesion breaking strength\\
+$\gamma_M$ & $ \pN/\nm$ & Membrane tension \\
+$B_M$& $\pN\nm$ & Membrane bending modulus \\
+$\sigma_m$ & $ \mbox{Pa}$ / [A.U.] & Actin-myosin contractility (per unit of $c$) \\
+$\hat\Pi$ & $ \mbox{Pa}$/nm & Hydrostatic pressure scale \\
+\hline
+\end{tabular}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Values for many of these parameters have been estimated, see Supplemental Material. The spatial terms significantly complicate both numerical solution and analysis of the model, and we find that their omission does not significantly influence blebbing dynamics. This is expected for membrane bending, since bending forces are expected to be negligible on length scales above $\sim (\beta/\gamma_M)^{(1/4)}\sim100\nm$ \cite{Allard:2012gy}. Therefore, unless otherwise noted below, we neglect the tangential cortex stress $\nabla^2y_C$ and membrane bending $\nabla^4 y_M$ terms. However, see Supplemental Material for solutions with full terms. 
+
+We non-dimensionalize by choosing a characteristic actin cortex thickness, $C_c= c_0$, a characteristic density of adhesions, $A_c =  \kon/\koff$, a characteristic time, $t_c=1/r \sim 30\s$ \cite{Fritzsche:2014jw}, and a characteristic position, $Y_c=y_M^0$, and a characteristic length by $x_c =\sqrt{2 \gamma_M \koff/(\kon \kappa)} \sim 0.2\mum$, resulting in a non-dimensional model, 
+\begin{align}
+\dfrac{dC}{d \tau}  & =  \Omega A - C\label{eq::nondimC}\\
+\epsilon\dfrac{dA}{ d \tau}  & =  \dfrac{C}{1+C} \mbox{exp}\left(-\dfrac{Y_M-Y_C}{D}\right) - A \mbox{exp} \left(\dfrac{Y_M-Y_C}{F_0} \right) \label{eq::nondimA}\\
+0 & = A(Y_M-Y_C) - MCY_C \label{eq::nondimyM}\\
+0 & = -A(Y_M-Y_C) + P(1-Y_M) +  \frac{\partial^2 Y_M}{\partial \chi^2} \label{eq::nondimyC}
+\end{align}
+with six nondimensional parameters defined in Table~2. 
+
+{\color{blue}Here we provide an overview of the roles of each term in Eq.~\ref{eq::nondimC}-\ref{eq::nondimyC}. The first and second term in the $C$ equation describe cortex formation and turnover, respectively. The first and second term in the $A$ equation describe attachment and detachment of cortex-membrane adhesions. The first exponential in Eq.~\ref{eq::nondimA} arises because the membrane and cortex must be in proximity for an adhesion to form. The second exponential in Eq.~\ref{eq::nondimA} describes the accelerated breaking of adhesions under force. Then, Eqs.~\ref{eq::nondimyM} and~\ref{eq::nondimyC} describe the mechanical balance between five forces acting on the membrane and cortex. The forces, in order of appearance, are: Adhesion force on the cortex; myosin contractility of the cortex; adhesion force on the membrane; pressure; and membrane tension.}
+
+Note that our choice of nondimensionalization means that only relative changes in $Y_M$ and $Y_C$ are physically meaningful. We numerically solve these equations as described in Supplemental Material \cite{wise07}. 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[t!]
+\caption{Non-dimensional parameters.}\centering \label{tab:par} 
+\begin{tabular}{ c  l  l}
+\hline
+Symbol & Definition & Interpretation \\
+\hline
+$ \Omega$ &  ${ \omega  \kon} / {\gamma c_0 \koff}$ & Cortex intensity\\
+ $\epsilon$ &  ${ r} / {\koff}$& Ratio of adhesion and cortex turnover times\\
+$D$ &  ${ \delta} / {y_M^0}$&Adhesion reach \\
+$F_0$ &  ${ f_0} / {\kappa y_M^0}$&Adhesion bond strength\\
+$M$ &  ${\sigma_m c_0 \koff} / {\kon \kappa}$ &Myosin contractility relative to adhesion strength\\
+$P$ &  ${\hat{\Pi} \koff} / {\kon \kappa}$ & Pressure relative to adhesion strength\\
+\hline
+\end{tabular}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+

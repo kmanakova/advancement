@@ -58,10 +58,9 @@
 		\vspace{0.4in}
 		\Thesistitle \\
 		\vspace{0.15in}
-		DISSERTATION \\
+		
 		\vspace{0.4in}
-		submitted in partial satisfaction of the requirements \\
-		for the degree of \\
+	
 		\vspace{0.4in}
 		\MakeUppercase\Degreename \\
 		\vspace{0.15in}
@@ -73,7 +72,7 @@
 	\end{center}
 	\vspace{1in}
 	\begin{flushright}
-		Dissertation Committee: \\
+		Potential Advancement Committee: \\
 		\Committeechair, Chair \\
 		\Othercommitteemembers \\
 	\end{flushright}
@@ -152,16 +151,6 @@
 	\clearpage
 }
 
-\newcommand{\curriculumvitaepage}
-{
-	\begin{center}
-		\textbf{\Large CURRICULUM VITAE} \\
-		\vspace{0.4in}
-		\textbf{\large{\Authorname}}
-	\end{center}
-	\Curriculumvitae
-	\clearpage
-}
 
 \newcommand{\abstractpage}
 {
@@ -217,34 +206,6 @@
 	  \dedicationpage
 	\fi
 	\tableofcontents
-	\clearpage
-	\phantomsection
-	\addcontentsline{toc}{chapter}{LIST OF FIGURES}
-	\listoffigures
-	\clearpage
-	\phantomsection
-	\addcontentsline{toc}{chapter}{LIST OF TABLES}
-	\listoftables
-	\ifx\listalgorithmname\undefined  % for algorithm package
-	\else
-	  \clearpage
-	  \phantomsection
-	  \addcontentsline{toc}{chapter}{LIST OF ALGORITHMS}
-	  \listofalgorithms
-	\fi
-	\clearpage
-	\phantomsection
-	\addcontentsline{toc}{chapter}{ACKNOWLEDGMENTS}
-	\acknowledgmentspage
-	\clearpage
-	\phantomsection
-	\addcontentsline{toc}{chapter}{CURRICULUM VITAE}
-	\curriculumvitaepage
-	\clearpage
-	\phantomsection
-	\addcontentsline{toc}{chapter}{ABSTRACT OF THE DISSERTATION}
-	\abstractpage
-	\clearpage
 	\setcounter{page}{1}
 	\pagenumbering{arabic}
 }
@@ -271,8 +232,18 @@
     \immediate\write\@auxout{\string\bibdata{#1}}%
   \fi
   % Make sure the table of contents has an entry for the bibliography
-  \addcontentsline{toc}{chapter}{Bibliography}
+  \addcontentsline{toc}{chapter}{References}
   \begin{singlespacing}
   \@input@{\jobname.bbl}
   \end{singlespacing}
 }
+
+\makeatletter
+\def\@makechapterhead#1{%
+  \vspace*{50\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \interlinepenalty\@M
+    \Huge\bfseries  \thechapter.\quad #1\par\nobreak
+    \vskip 40\p@
+  }}
+\makeatother

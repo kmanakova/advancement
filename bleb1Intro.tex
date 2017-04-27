@@ -1,0 +1,54 @@
+% !TEX root = bleb.tex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+% why the cell surface is important
+The eukaryotic cell surface is the site of cell-cell communication \cite{Allard:2012gy}, cell-environ\-ment interactions including motility and mechanosensing \cite{Zhu:2013kq}, and cell morphogenesis \cite{Allard:2012if}, among other processes. Many of these processes involve mechanical forces and deformation, making mechanics of the cell surface an increasingly important topic of investigation.
+
+% why the cell surface is complicated
+The study of cell surface mechanics is complicated by dynamic interactions among its multiple constituents with distinct material properties. 
+%membrane
+The plasma membrane is fluid \cite{Rangamani:2013ce} and resists deformation and experiences surface tension on the order of 10-100 pN/nm \cite{Tinevez:2009bh} that is spatially and temporally non-uniform \cite{Peleg:2011fz}. 
+% cortex
+Below the membrane is a $\sim100\nm$ layer of F-actin with distinct microarchitecture from the cytoplasmic F-actin further into the cell \cite{Clark:2013ef}, termed the cortex. The cortex is anisotropic poro-viscoelastic material \cite{Salbreux:2009fp,Hannezo:2015ba} that generates internal active contractile stresses by association with myosin \cite{Tinevez:2009bh}. 
+% adhesions
+The membrane and cortex are decorated with a myriad of molecules, some of which interact with both of them, thereby facilitating dynamic adhesion between them \cite{Fritzsche:2014jw}.   
+% big questions about cell surface
+This complexity obscures fundamental questions such as, how quickly is hydrostatic pressure propagated through the cortex \cite{Strychalski:2013eo,Charras:2009dp,Clark:2014fj}, or surface tension propagated across the membrane \cite{Peleg:2011fz,BenFogelson:2014gx,Rangamani:2013ce}?
+% function
+These questions have functional consequences since, for example, membrane bending and tension are implicated in endocytosis \cite{Liu:2010hla}, cell polarization \cite{Weiner:2007gd} and motility \cite{BenFogelson:2014gx, Yip:2015cb}, while the cortex is implicated in cell division, initiating filopodia and other cellular protrusion \cite{Leijnse:2015fd},  both facilitating and preventing vesicle export \cite{Wollman:2012kha},  and wound healing \cite{Salbreux:2009fp}. 
+ 
+
+% blebs
+An example cell process that involves all the above components is offered by cellular blebbing, pressure-driven  protrusions that occur in many cell types and conditions \cite{Charras:2008ic,Charras:2008bz,Paluch:2013ea}. An individual bleb begins with an initiation phase whereupon the membrane separates from the cortex, either spontaneously or under experimental triggering such as laser ablation \cite{Clark:2013ef, Charras:2008ic}. Initiation is followed by a rapid ($\sim10\s$) expansion phase which, unlike other cellular protrusion, is not actively driven by cytoskeletal polymerization \cite{Danuser:2012dr}. After expansion, blebs can exhibit a range of dynamic behaviors: Stationary blebs heal in place with a slower timescale ($\sim$minutes). Other classes of bleb that have been experimentally observed travel around the periphery of the cell --- a phenomenon termed circus movement \cite{Fujinami:1975vo,Anonymous:4HHO02bL,Lim:2012fz} --- or repeatedly bleb on top of an existing bleb \cite{Charras:2008ic}. The complete life-cycle is determined by a complex interplay between flow of cytosol into the bleb, contractive forces in the cortex and the formation and maintenance of membrane-cortex adhesions.
+% bleb function
+Blebs are implicated in non-lamellipodial cell motility \cite{Logue:2015jj,Charras:2008gf}, including in protease-inhibited cancer cells \cite{Friedl:2003if}; in maintaining homeostasis during division \cite{Sedzinski:2011ef}; and have a speculated role in the origin of eukaryotic life \cite{Baum:2014ee}.
+
+% bleb travel
+Traveling waves of protrusion are increasingly reported in different cell types \cite{Weiner:2007gd,Ryan:2012ej}, but these protrusions are typically F-actin-enriched (although see \cite{Kapustina:2013gc}), whereas blebs represent regions with reduced F-actin.
+A fundamental question to the understanding of any traveling wave phenomenon \cite{Allard:2012if} is: what determines the traveling velocity of a traveling bleb? And, in the case of blebs which may be stationary or travel, even simultaneously at different locations on the same cell, what determines whether a bleb will travel or heal in place? 
+
+% previous models of blebbing
+Several theoretical models of blebbing have been developed to capture various aspects of the process. 
+% bob, wanda, Mitran
+Computational fluid dynamics models \cite{Strychalski:2013eo,Strychalski:2015fu,Young:2010dp} have been developed to understand the initial expansion phase during which cytosolic fluid follows the protruding membrane. Due to the computational cost of solving the fluid equations along with their mechanical interaction with immersed structures (which typically have sub-second dynamics \cite{Strychalski:2013eo,Strychalski:2015fu}), simulations of these models are typically limited to 2D approximation and seconds timescales. 
+% maha
+Other researchers \cite{Lim:2012fz} have used force-balance models \cite{Alert:2015gz,Kapustina:2013gc} to obtain computationally tractable models describing the full life cycle. These models are in 2D and must assume an {\it a priori} bleb healing velocity to generate traveling blebs. 
+% Baker-Goriely
+Continuum analytical models  \cite{Woolley:2013bx,Woolley:2014jm, Woolley:2015jn} have also been developed that move beyond the typical small-deformation approximations typically used to describe membrane geometry. These models capture details of the shape of stationary bleb that have, among other findings, implicated lipid flow in determining bleb behavior. 
+
+% here we
+A full, 3D description of the full life-cycle of traveling blebs is therefore lacking. In this work, we develop a model of local cell surface mechanics on timescales of seconds to minutes, thereby including cortex turnover and bleb healing. We exploit two simplifying assumptions: First, we assume hydrodynamic equilibrium is reached rapidly and therefore avoid computationally taxing fluid dynamic simulation, at the expense of losing information about the expansion phase. Second, our model contains a single, ``effective" cortex corresponding to the weighted average of cortical actin, allowing us to include implicitly the cytoskeleton further inside the cell. 
+
+An emerging feature of this model is that transient detachment between membrane and cortex can lead to: 1) rapid healing, 2) stationary bleb formation, and 3) spontaneous bleb travel, depending on model parameters. Our model makes two main contributions: First, since traveling blebs arise naturally, we can  elucidate the determinants of bleb travel. In particular,  
+% simplifying assumptions/limitations
+several simplifying assumptions allow us to obtain an analytic expression for bleb travel velocity that provides experimentally-accessible perturbations predicted to accelerate or decelerate travel. 
+Our second finding is that the biophysical ingredients hypothesized to account for blebbing produce traveling blebs with unrealistic geometry. 
+% key insights
+This suggests yet-to-be-identified mechanism playing a role in cell integrity and the localization of morphological perturbations. 
+We explore the influence of dynamic, non-uniform membrane tension;  hydrostatic pressure equilibration occurring at multiple length scales (i.e., global versus local \cite{Strychalski:2015fu}); and spatial heterogeneity. We find the latter sufficient to maintain bleb compactness during travel.
+
