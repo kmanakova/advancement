@@ -1,4 +1,4 @@
-% !TEX root = bleb.tex
+% !TEX root = Project1.tex
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -6,7 +6,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-Our minimal model, summarized schematically in Fig.~\ref{fig::schematic}, consists of four fundamental dynamic variables, as functions of time $t$ and location on the two-dimensional cell surface, parametrized by $(x_1, x_2)$. The actin cortex, has local height described by $y_C(x_1,x_2,t)$ measured normal to the mean cell surface from its steady-state configuration $y_C=0$, and thickness $c(x_1,x_2,t)$. The cortical-cytoplasmic actin cytoskeleton can in principle have complicated morphologies that cannot be accounted for by a single location $y_C$, so we think of $y_C$ as the weighted average position of maximal cortical actin. Membrane-cortex adhesions are described by density $a(x_1,x_2,t)$ in molecules$/\nm^2$. Finally, the membrane has local height $y_M(x_1,x_2,t)$. {\color{blue} Note that our model is agnostic about the molecular constituents of the membrane, and it could include the plasma membrane as well as permanently membrane-associated proteins and cytoskeletal networks \cite{Kapustina:2013gc}}. Our approach is similar to previous descriptions of membrane mechanics \cite{Alert:2015gz,Lim:2012fz,Allard:2012gy,Peleg:2011fz}.
+Our minimal model, summarized schematically in Fig.~\ref{fig::schematic}, consists of four fundamental dynamic variables, as functions of time $t$ and location on the two-dimensional cell surface, parametrized by $(x_1, x_2)$. The actin cortex, has local height described by $y_C(x_1,x_2,t)$ measured normal to the mean cell surface from its steady-state configuration $y_C=0$, and thickness $c(x_1,x_2,t)$. The cortical-cytoplasmic actin cytoskeleton can in principle have complicated morphologies that cannot be accounted for by a single location $y_C$, so we think of $y_C$ as the weighted average position of maximal cortical actin. Membrane-cortex adhesions are described by density $a(x_1,x_2,t)$ in molecules$/\nm^2$. Finally, the membrane has local height $y_M(x_1,x_2,t)$.  Note that our model is agnostic about the molecular constituents of the membrane, and it could include the plasma membrane as well as permanently membrane-associated proteins and cytoskeletal networks \cite{Kapustina:2013gc}. Our approach is similar to previous descriptions of membrane mechanics \cite{Alert:2015gz,Lim:2012fz,Allard:2012gy,Peleg:2011fz}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
@@ -51,9 +51,12 @@ corresponding to the standard Canham-Helfrich energy with membrane tension $\gam
 \begin{align}
 \mathcal{H}_C &= c\sigma_m \left( y_C^2 + \frac{1}{2}\; w_C \left( \nabla y_C \right)^2 \right), 
 \end{align}
-accounting for active of the cortex, which generates contraction stress $\sigma_m c$, assumed proportional to cortex thickness. The first term accounts for inward contractility, as the cortical cytoskeleton pulls against the cytoplasmic cytoskeleton, generating a normal (inwards) force, {as shown in  Supplemental Fig. 1}. Note this term has been neglected in previous work \cite{Lim:2012fz}. The second term accounts for tangential stress in the plane of the cortex, where $w_C$ is the cortex dimension that translates the 3D contractile stress to a tangential planar contractile tension. Importantly, we find that in traveling blebs, where the cortex is discontinuous, the tangential term does not generate sufficient inward force to heal the tail of the bleb as it travels, highlighting the importance of the normal contractility term. Cortex elasticity terms describing how the cortex resists deformation are straightforward to add, however we find that their omission is sufficient to explain our key results. 
+accounting for active of the cortex, which generates contraction stress $\sigma_m c$, assumed proportional to cortex thickness. The first term accounts for inward contractility, as the cortical cytoskeleton pulls against the cytoplasmic cytoskeleton, generating a normal (inwards) force, {as shown in  Fig. ~\ref{fig::blebgeometry}}. Note this term has been neglected in previous work \cite{Lim:2012fz}. The second term accounts for tangential stress in the plane of the cortex, where $w_C$ is the cortex dimension that translates the 3D contractile stress to a tangential planar contractile tension. Importantly, we find that in traveling blebs, where the cortex is discontinuous, the tangential term does not generate sufficient inward force to heal the tail of the bleb as it travels, highlighting the importance of the normal contractility term. Cortex elasticity terms describing how the cortex resists deformation are straightforward to add, however we find that their omission is sufficient to explain our key results. 
 
 The mechanical features included in the energy Eq.~\ref{eq::energy} can also be understood by their equivalent force-balance form, Eq.~\ref{eq::forceBalanceCortex}-\ref{eq::forceBalanceMembrane} below.
+
+
+
 
 % pressure
 Pressure propagation inside the complex rheology of the cytoplasm is under intense investigation \cite{Charras:2005dm, Strychalski:2013eo, Sedzinski:2011ef}. To address the nature of pressure dynamics, we investigate several pressure model variants. As a base model, we assume pressure is locally relaxed when the membrane is allowed to relax, 
@@ -71,10 +74,10 @@ Taking the variational derivative of Eq.~\ref{eq::energy} leads to force-balance
 0 &= + a \kappa (y_M-y_C) - \sigma_m c y_C + \sigma_m c\, w_C \nabla^2  y_C \label{eq::forceBalanceCortex}\\
 0 &= - a\kappa (y_M-y_C) + \frac{\delta \hat{\Pi}}{\delta y_M}  + \gamma_M \nabla^2  y_M - \beta\;\nabla^4 y_M \label{eq::forceBalanceMembrane}
 \end{align}
-Physical parameters are summarized in Table~1. 
+Physical parameters are summarized in Table~\ref{tab:modelparameters}. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[t!]
-\caption{Model parameters.}\centering \label{tab:par} 
+\caption{Model parameters.}\centering \label{tab:modelparameters} 
 \begin{tabular}{ c  l  l}
 \hline
 Symbol & Dimensions & Meaning \\
@@ -95,7 +98,7 @@ $\hat\Pi$ & $ \mbox{Pa}$/nm & Hydrostatic pressure scale \\
 \end{tabular}
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Values for many of these parameters have been estimated, see Supplemental Material. The spatial terms significantly complicate both numerical solution and analysis of the model, and we find that their omission does not significantly influence blebbing dynamics. This is expected for membrane bending, since bending forces are expected to be negligible on length scales above $\sim (\beta/\gamma_M)^{(1/4)}\sim100\nm$ \cite{Allard:2012gy}. Therefore, unless otherwise noted below, we neglect the tangential cortex stress $\nabla^2y_C$ and membrane bending $\nabla^4 y_M$ terms. However, see Supplemental Material for solutions with full terms. 
+Values for many of these parameters have been estimated, see Fig. ~\ref{fig::blebgeometry}. The spatial terms significantly complicate both numerical solution and analysis of the model, and we find that their omission does not significantly influence blebbing dynamics. This is expected for membrane bending, since bending forces are expected to be negligible on length scales above $\sim (\beta/\gamma_M)^{(1/4)}\sim100\nm$ \cite{Allard:2012gy}. Therefore, unless otherwise noted below, we neglect the tangential cortex stress $\nabla^2y_C$ and membrane bending $\nabla^4 y_M$ terms. However, see Appendix ~\ref{sec:project1} for solutions with full terms. 
 
 We non-dimensionalize by choosing a characteristic actin cortex thickness, $C_c= c_0$, a characteristic density of adhesions, $A_c =  \kon/\koff$, a characteristic time, $t_c=1/r \sim 30\s$ \cite{Fritzsche:2014jw}, and a characteristic position, $Y_c=y_M^0$, and a characteristic length by $x_c =\sqrt{2 \gamma_M \koff/(\kon \kappa)} \sim 0.2\mum$, resulting in a non-dimensional model, 
 \begin{align}
@@ -106,9 +109,9 @@ We non-dimensionalize by choosing a characteristic actin cortex thickness, $C_c=
 \end{align}
 with six nondimensional parameters defined in Table~2. 
 
-{\color{blue}Here we provide an overview of the roles of each term in Eq.~\ref{eq::nondimC}-\ref{eq::nondimyC}. The first and second term in the $C$ equation describe cortex formation and turnover, respectively. The first and second term in the $A$ equation describe attachment and detachment of cortex-membrane adhesions. The first exponential in Eq.~\ref{eq::nondimA} arises because the membrane and cortex must be in proximity for an adhesion to form. The second exponential in Eq.~\ref{eq::nondimA} describes the accelerated breaking of adhesions under force. Then, Eqs.~\ref{eq::nondimyM} and~\ref{eq::nondimyC} describe the mechanical balance between five forces acting on the membrane and cortex. The forces, in order of appearance, are: Adhesion force on the cortex; myosin contractility of the cortex; adhesion force on the membrane; pressure; and membrane tension.}
+Here we provide an overview of the roles of each term in Eq.~\ref{eq::nondimC}-\ref{eq::nondimyC}. The first and second term in the $C$ equation describe cortex formation and turnover, respectively. The first and second term in the $A$ equation describe attachment and detachment of cortex-membrane adhesions. The first exponential in Eq.~\ref{eq::nondimA} arises because the membrane and cortex must be in proximity for an adhesion to form. The second exponential in Eq.~\ref{eq::nondimA} describes the accelerated breaking of adhesions under force. Then, Eqs.~\ref{eq::nondimyM} and~\ref{eq::nondimyC} describe the mechanical balance between five forces acting on the membrane and cortex. The forces, in order of appearance, are: Adhesion force on the cortex; myosin contractility of the cortex; adhesion force on the membrane; pressure; and membrane tension.
 
-Note that our choice of nondimensionalization means that only relative changes in $Y_M$ and $Y_C$ are physically meaningful. We numerically solve these equations as described in Supplemental Material \cite{wise07}. 
+Note that our choice of nondimensionalization means that only relative changes in $Y_M$ and $Y_C$ are physically meaningful. We numerically solve these equations as described in Appendix ~\ref{sec:project1}. \cite{wise07}. 
 
 
 

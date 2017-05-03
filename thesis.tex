@@ -26,11 +26,15 @@
 \usepackage[export]{adjustbox}
 \usepackage{graphicx,caption}
 
+
 % Some other useful packages
 \usepackage{caption}
 \usepackage{subcaption}  % \begin{subfigure}...\end{subfigure} within figure
 \usepackage{multirow}
 \usepackage{tabularx}
+\usepackage{cleveref}
+
+
 
 % plainpages=false fixes the "duplicate ignored" error with page counters
 % Set pdfborder to 0 0 0 to disable colored borders around PDF hyperlinks
@@ -88,6 +92,8 @@
 \newcommand{\citel}[1]{\citep{#1}}
 \newcommand{\citelt}[1]{\citet{#1}}
 \newcommand{\ten}[1]{\bm #1}
+\newcommand{\ffrac}[2]{\displaystyle{\frac{{#1}}{{#2}}}}
+
 
 \def\Tevac{T_{1/2}^{\mbox{\,\scriptsize evac}}}
 \def\Treturn{T_{1/2}^{\mbox{\,\scriptsize return}}}

@@ -7,34 +7,220 @@
 % 2) Call \myappendix once, and then make each appendix a \section.
 
 \appendix
-\chapter{Appendix Title}
+\chapter{Appendices}
 
-Supplementary material goes here. See for instance Figure
-\ref{fig:quote}.
 
-\section{Lorem Ipsum}
+\section{Cell surface mechanochemistry and the determinants of bleb formation, healing and travel velocity}
+\label{sec:project1}
 
-dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-mollit anim id est laborum.
+\subsection{Summary of experimental predictions}
+The model makes several testable predictions. For convenience, we tabulate these predictions here. Note that these predictions presume that the cell is exhibiting blebs before the perturbation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[h!]
+\caption{Model predictions for experimental perturbations.\vspace{0.1cm}} \label{tab:predictions} 
+{\small
+\hspace{-0.25cm}\begin{tabular}{ l  l  l}
+\hline
+Experimental perturbation & Parameter & Prediction \\
+\hline
+Increasing hydrostatic pressure & $P\uparrow$ & Larger blebs \\
+Increasing molecular size of adhesion molecules & $D\uparrow$ & Abolish blebbing\\
+Decreasing molecular size of adhesion molecules & $D\downarrow$ & Slower bleb healing\\
+Increasing myosin contractility & $M\uparrow$ & Abolish blebbing\\
+Decreasing myosin contractility  & $M\downarrow$ & Slower bleb healing\\
+Increasing membrane tension &$\gamma_M\uparrow$ & Faster bleb travel\\
+Increasing abundance of adhesions &$k_{\mbox{\scriptsize on}}\uparrow$ & Slower bleb travel\\
+\hline
+\end{tabular}
+}
+\end{table}
+
+\subsection{Details of geometry of cortical and cytoplasmic actin}
+In 3D, the cell surface and cortex are curved, discontinuous two-dimensional manifolds and the cytoplasm is a 3D field. In full generality, the cortex and cytoplasmic actin network have a density at each point in space. We assume that actin-myosin contractility is isotropic and generates local stress proportional to the local density of cortical actin $c$. This stress therefore has two components: a tangential component due to connection with nearby cortex 
+\begin{equation}
+\sigma_t = \sigma_m w_c c \nabla y_C, 
+\end{equation}
+and a normal stress due to connection with the cytoplasmic actin network
+\begin{equation}
+\sigma_n = \sigma_m c y_C. 
+\end{equation}
+We find that the normal contractile force is necessary for asymetric bleb healing, as occurs during bleb travel. This necessity can be understood from Fig.~\ref{fig::blebgeometry}: In the absence of cytoplasmic actin, the tangential stress pulls the membrane tangentially, but there is no force driving the cortex into the place of the cell. 
 
 \begin{figure}
-  \centering
-  \begin{tabular}{l}
-    ``I am glad I was up so late,\\
-    \quad{}for that's the reason I was up so early.''\\
-    \em \footnotesize William Shakespeare (1564-1616), British
-    dramatist, poet.\\
-    \em \footnotesize Cloten, in Cymbeline, act 2, sc. 3, l. 33-4.
-  \end{tabular}
-  \caption{A deep quote.}
-  \label{fig:quote}
+   \begin{center}
+   \captionsetup{width=5.5in}
+	\includegraphics*[width=8.5cm]{Project1/figs/figBlebGeometry.pdf}
+      \caption{Approximations of cortex and cytoplasmic actin geometry in 3D. (A-B) Bleb geometry in 3D including only tangential cortical contractility (A), and both tangential and normal contractility (B). (C-D) Representation of 2D model. (E) Hypothetical 1D ``non-spatial" model corresponding to ODE system used in this project.}
+      \label{fig::blebgeometry}
+   \end{center}
 \end{figure}
 
+Our goal is to understand in 3D. To this end, we find it informative to study simplified 2D systems and 1D systems as an analytical tool. The 2D model is equivalent to either the geometries shown in  Fig.~\ref{fig::blebgeometry}C or D. The 1D model, which we refer to as the ODE model in the Main Text, corresponds to the geometry shown in Fig.~\ref{fig::blebgeometry}E. 
+
+\subsection{Parameter estimation}
+\begin{table}[h!]
+\caption{Estimates of parameters used in non-dimensionalization.}\centering \label{tab:parameterestimates} 
+\begin{tabular}{ c  l  l}
+\hline
+Model parameter & Estimated value & Source \\
+\hline
+$r$ & $0.1/s$ & \cite{Fritzsche:2014jw}\\
+$\kon$ & $100/ \mum^2 \cdot \s$  & \cite{Charras:2008bz}\\
+$\koff $ & $ 1/s$ & \cite{Fritzsche:2014jw}\\
+%$\delta$ & $0.5 \mum$ & assumed\\
+$\kappa$ & $10 \pN/ \mu m$ &  \cite{Charras:2008bz}\\
+%$f_0$ & $30 \pN$ \\
+$\sigma_m$ & $0.1 \mbox{Pa}/ \mum^2$ & \cite{Charras:2008bz}\\
+$\hat{\Pi}$ & $100 \mbox{Pa}/ \mum$ & \cite{Charras:2008bz}\\
+$y_M^0$ & $3 \mum$ & \cite{Clark:2013ef}\\
+$\gamma_M$ & $100 \pN/ \mum$ &  \cite{Peukes:2014fw}\\
+\hline
+\end{tabular}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Using these estimates, the correspondence between dimensional and non-dimensional parameters are given by
+\begin{align} 
+ x  %&= \chi x_c = \chi \sqrt{\dfrac{2(100 \pN/ \mum)(1/\s)}{(100/ \mum^2 \cdot \s)(10 \pN/ \mum)}} \\
+ & =  \chi \cdot 0.2 \mum \\
+ t %&= \tau t_c = \tau / (0.1/s) \\
+ &=  \tau \cdot 10s \\
+a %&= A A_c = A (100/ \mum^2 \cdot s)/(1/s) \\
+&= A \cdot 100 /\mu m^2 \\
+y_M %&= Y_M y_M^0 \\
+&= Y_M \cdot 3 \mum \\
+y_C %&= Y_C y_M^0 \\
+&= Y_C \cdot 3 \mum.
+\end{align}
+Note that model parameters not included in Table ~\ref{tab:parameterestimates}  do not impact the non-dimensionalization.
+
+To perform the parameter-space exploration in Fig.~5, we used ranges shown in Table ~\ref{tab:parameterranges}. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[h!]
+\caption{Dimensional parameters with ranges explored in simulation.}\centering \label{tab:parameterranges} 
+\begin{tabular}{cl}
+\hline
+{Parameter} & {Range explored for velocity plot}\\
+\hline
+$\omega$   &  $0.0004-0.0006 \text{ [A.U.]} \cdot \text{s}^{-1}$ \\
+$r$  & $0.01-0.25 \text{ s}^{-1}$ \\
+$\kon$  & $95-140  \mum^{-2}\text{s}^{-1}$\\
+$\koff$ & $0.5-1.05 \text{ s}^{-1}$\\
+$\delta$ &  $0.14-0.17  \mum$\\
+$\kappa$ & $9-13 \text{ pN/$\mum$}$\\
+$f_0$ & $5-20 \text{ pN}$ \\
+$\sigma_m$  & $550-725\text{ Pa/ [A.U.]}$\\
+$\hat{\Pi}$ & $65-105\text{  Pa/$\mum$}$\\
+$\gamma_M$ & $10-400 \text{ pN/$\mum$}$\\
+\hline
+\end{tabular} 
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Model variants}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{Pressure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\begin{equation}
+%\label{eq::globalPressure}
+%\end{equation}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{Tension}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\begin{equation}
+%\label{eq::nonuniformTension}
+%\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Bending}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The inclusion of higher-order derivatives in the mechanical energy transform the system into a higher-order boundary value problem. For example, the bending energy term transforms the membrane shape equation to a fourth-order equation. We simulate the base model with the addition of bending terms $B>0$, where the nondimensional bending modulus is $B \equiv \beta/\gamma x_c^3$.  Results are shown in Fig.~\ref{fig::bending}. We find that the excitable parameter regime and traveling parameter regimes are unchanged. For $B=100$, the velocity of travel is increased by approximately two-fold and healing is delayed compared to no bending. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[h!]
+   \begin{center}
+   \captionsetup{width=17cm}
+     \includegraphics*[width=17cm,center]{Project1/figs/figBending}
+      \caption{Influence of membrane bending rigidity. (A) Traveling bleb on a uniform surface with no bending energy $B=0$. (B) Traveling bleb with large bending rigidity $B = 100$. The bleb velocity is increased by approximately two-fold and healing is delayed (but eventually occurs, not shown). }
+      \label{fig::bending}
+   \end{center}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Part-local, part-global pressure models}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In the Main Text, we present models in which pressure is either purely global (one quantity is shared among the entire domain) or purely local (a local increase in $y_M$ leads to a local drop in pressure, and no where else). However, recent evidence from computational models \cite{Strychalski:HizQv1Ti} suggests that in a poroelastic cytoplasm, local membrane extension may lead to a large local pressure drop and a smaller global pressure drop. To address this possibility, we simulate model variants in which the pressure drop is part local and part global.
+\begin{itemize}
+\item Local-global additive:
+\begin{equation}
+\Pi(x_1,x_2) = \hat{\Pi}\left(\left(1 - \frac{y_M(x_1,x_2)}{y_M^0}\right) + \epsilon_p \iint  \left(1 - \frac{y_M(\tilde{x}_1,\tilde{x}_2)}{y_M^0}\right)\, d\tilde{x}_1 d\tilde{x}_2\right)\ \label{eq::localGlobalPressureAdditive}
+\end{equation}
+\item Local-global multiplicative pressure:
+\begin{equation}
+\Pi(x_1,x_2) = \hat{\Pi}\cdot\left(1 - \frac{y_M(x_1,x_2)}{y_M^0}\right)\cdot \iint  \left(1 - \frac{y_M(\tilde{x}_1,\tilde{x}_2)}{y_M^0}\right)\, d\tilde{x}_1 d\tilde{x}_2 \label{eq::localGlobalPressureMultiplicative}
+\end{equation}
+\end{itemize}
+Results are shown in Fig.~\ref{fig::localGlobalPressure}. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[h!]
+   \begin{center}
+   \captionsetup{width=17cm}
+     \includegraphics*[width=17cm,center]{Project1/figs/figPressure}
+      \caption{Simulations assuming that local membrane protrusion leads to both local and global pressure drops. (A) Additive pressure Eq.~\ref{eq::localGlobalPressureAdditive} with weak global part, $\epsilon_p=0.1$. (B) Additive pressure with intermediate global part, $\epsilon_p=0.18$. (C) Multiplicative pressure. }
+      \label{fig::Project1/figs/localGlobalPressure}
+   \end{center}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+As expected, when the global component of pressure drop is small, simulation results are similar to purely-local pressure, with blebs expanding outward as an expanding annulus. As intermediate global components, the global pressure drop is enough to collapse the bleb as its area increases. No symmetry breaking is observed. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Details of numerical method}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Base model}
+
+The base model, Eqs. 10-13, comprise a two-dimensional boundary value problem of elliptic type at each instant in time, coupled to two first-order (in time) partial differential equations. To solve the base model, we discretize space into a uniform grid of width $\Delta\chi=0.1$ and time step size $\Delta \tau = 0.01$. We use a standard  five-point stencil finite difference method in space and forward-Euler in time.
+
+\subsection{Non-uniform tension}
+
+The inclusion of non-uniform tension changes the boundary value problem to a non-uniform elliptic equation. The equations takes the form 
+\begin{equation}
+P  = f(\chi_1,\chi_2) Y_M(\chi_1,\chi_2) -\nabla \cdot \left( \Gamma(\chi_1,\chi_2) \nabla Y_M(\chi_1,\chi_2) \right)
+\end{equation}
+where $f$ and $\Gamma$ are spatially varying. We use a uniform grid in space and set $\Delta \chi = 0.1$. The functions $f, Y_M \text{ and } \Gamma$ all live at cell edges ($ f|_{i,j} = f(i\Delta \chi,\ j\Delta \chi),\ \ i = 1,2,..., 2000$ ) and we impose periodic boundary conditions. The parameter functions $f$ and $\Gamma$ must be interpolated to the edges, which we do by uniform averaging. The resulting discretization stencil is given by
+\begin{multline*}
+P  = \left(f|_{i,j} + \dfrac{1}{2\Delta x^2} \left(\Gamma|_{i+1,j}+\Gamma|_{i-1,j}+\Gamma|_{i,j+1}+\Gamma|_{i,j-1}+4\Gamma|_{i,j} \right) \right) \bf{ Y_M|_{i,j}}\\
+ - \dfrac{1}{2\Delta x^2} \left( (\Gamma|_{i+1,j}+\Gamma|_{i,j}) \bf{ Y_M|_{i+1,j}} +( \Gamma|_{i,j}+\Gamma|_{i,j-1}) \bf{ Y_M|_{i-1,j}} \right) \\
+- \dfrac{1}{2\Delta x^2}  ((\Gamma|_{i,j}+\Gamma|_{i,j+1}) \bf{Y_M|_{i,j+1} } +   (\Gamma|_{i,j}+\Gamma|_{i,j-1}) \bf{  Y_M|_{i,j-1}})
+\end{multline*}
+Since this equation remains linear, it can be written into a sparse matrix and solved as a linear system.
+
+\subsection{Higher-order models including bending forces}
+Adding higher order terms, including bending forces, transforms the boundary value problem into a higher-order boundary value problem. The bending term, in particular, introduces a fourth-order bilaplacian operator. This significantly increases the computational cost of solving the equations, therefore we use a more sophisticated solver described here. 
+We solve the following equations:
+\begin{align}
+\ffrac{\partial C}{\partial \tau}&=\Omega A-C \label{eq:c} \\
+\epsilon \ffrac{\partial A}{\partial \tau}&=\ffrac{C}{1+C} \exp\left(-\left(\ffrac{1}{D}\ffrac{MC}{A+MC}Y_M\right)\right)-A\exp\left(\ffrac{1}{F_0}\ffrac{MC}{A+MC}Y_M\right) \label{eq:a} \\
+P&=hY_m-\nabla\cdot(\Gamma\nabla Y_M)+B\nabla^4 Y_M \label{eq:ym} \\
+h&=\ffrac{AMC}{A+MC}+P \label{eq:h},
+\end{align}
+where $\Omega=57,\epsilon=0.1,D=0.15,F_0=1,M=0.007$ and $P=0.1$. In non-uniform tension models, $B=0$ and the non-uniform tension term $\Gamma=1+\theta C$ where $\theta=0.1$ or $\theta=0.2$. For bending models, $\Gamma=1$ and $B\in\{10^{-2},10^{-1},1,10^1,10^2\}$.
+
+All variables satisfy periodic conditions at all boundaries. The initial condition for $Y_M$ and $C$ is their steady state value $Y_M^{ss}=0.5582$ and $C^{ss}=15.8236$. $A$ is also set to steady state $A^{ss}=0.2776$ except where the bleb is triggered on a 5$\chi$ x 5$\chi$ patch where $A=0$.
+
+The system is solved in a square computational domain $[-200,200]^2$. The domain is initialized to a $64\times 64$ mesh with a maximum of $5$ refinement levels. At the finest level, grid length is $400/(64\times 2^5)\approx 0.2$. The time step is $10^{-2}$.
+
+We use the implicit second order Crank-Nicholson scheme for time discretization in \cref{eq:a,eq:c}. Spatial derivatives are discretized using central difference approximations. \cref{eq:ym} is reformulated as a system of two second order equations. Block structured Cartesian refinement is used to efficiently resolve the multiple spatial scales. In particular, the mesh is refined in regions with large spatial gradients of $Y_M$ (typically around the bleb). The equations at implicit time level are solved by the adaptive nonlinear multigrid method developed in \cite{wise07}.
 
 %%% Local Variables: ***
 %%% mode: latex ***
