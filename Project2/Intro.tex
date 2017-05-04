@@ -1,5 +1,15 @@
 \section{Introduction}
 
+The study of biomechanics coupled to chemical kinetics naturally leads to integro-PDEs. [REFERENCE]. Here we will show that our model used to study cellular blebbing behavior (see Chapter ~\ref{chap:cellbleb}) fall into this category. Since we believe a broad class of cellular behaviors obey similar mechanical constraints in conjunction with chemical dynamics, a study of the properties of these types of equations is a promising endeavor. In particular, we have chosen to investigate the travelling wave solutions of a particular class of equations arising in cellular biophysics, using our previously described cellular blebbing model as a test case. 
 
+The cellular blebbing model is described by the following dimensionless system
 
+\begin{align}
+\dfrac{dc}{dt}  & =  \Omega a - c\label{eq::nondimc}\\
+\epsilon\dfrac{da}{ dt}  & =  \dfrac{c}{1+c} \mbox{exp}\left(-\dfrac{y-y_C}{D}\right) - a \mbox{exp} \left(\dfrac{y-y_C}{F} \right)\label{eq::nondima}\\
+0 & = a(y-y_C) - Mcy_C\label{eq::nondimyC}\\
+0 & = -a(y - y_C) + P (1-y) + \dfrac{\partial^2 y}{\partial x^2}\label{eq::nondimyM}
+\end{align}
+
+For a full discussion of the derivation of these equations, see Chapter ~\ref{chap:cellbleb}.
 
