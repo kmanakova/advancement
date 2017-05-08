@@ -1,16 +1,16 @@
 \section{Non local Maxwell Condition}
 
-{\color{red}Traveling pulses are a generic feature of spatially-extended excitable systems (Idema et al., 2013, Ryan et al., 2012, Bement et al., 2015). In many cases, neighboring regions are coupled by the diffusion of a molecular participant. In these reaction-diffusion systems, a simple mathematical condition exists for determining whether an excitation will induce a traveling pulse or remain localized, sometimes called the Maxwell condition (Britton, 1982, Mori et al., 2008). Since our system is not a reaction-diffusion system, the Maxwell condition fails to predict whether the blebs travel or not. }
 
-We seek an analog of the Maxwell condition for the bleb model, and similar non-local PDEs. In the fast timescale, we have $c = c^{ss}$.  The dynamics of excitation are thus only governed by the $a$ equation. We will make progress on this by studying the following systems, from most general to most narrow.
+
+As previosuly mentioned, we seek an analog of the Maxwell condition for the bleb model, and similar non-local PDEs. In the fast timescale, we have $c = c^{ss}$.  The dynamics of excitation are thus only governed by the $a$ equation. We will make progress on this by studying the following systems, from most general to most narrow.
 \begin{enumerate}[label=(\Alph*)]
-\item \textbf{Ultimately, we are interested in a necessary and sufficient traveling wave condition for the general}
+\item \textbf{Again, we are ultimately interested in a necessary and sufficient traveling wave condition for the general}
 \begin{align}
 \dfrac{\partial a}{ \partial t}  & =  f(a,y)\\
 0 & =g \left(a,y,\dfrac{\partial^2 y}{\partial x^2}\right).
 \end{align}
-We have not yet succeeded in this. 
-\item\textbf{The specific system we are interested in is}
+
+\item\textbf{Our specific system restricited to the fast timescale is}
 \begin{align}
 \dfrac{\partial a}{ \partial t}  & =  \dfrac{c^{ss}}{1+c^{ss}} \mbox{exp}\left(-\dfrac{y-y_C}{D}\right) - a \mbox{exp} \left(\dfrac{y-y_C}{F} \right)\label{eq::a_ODE}\\
 0 & = -a(y - y_C) + P (1-y) + \gamma_M \dfrac{\partial^2 y}{\partial x^2}\label{eq::yM_eq} \\
@@ -22,13 +22,15 @@ Note that since Eq.~\ref{eq::nondimyC2} is algebraic in $y_C$, we can eliminate 
 \dfrac{da}{ dt}  & = f_1(y) - a f_2(y)\label{eq::gen_a}\\
 0 & = g_1(y) - ag_2(y) +  \dfrac{\partial^2 y}{\partial x^2}\label{eq::gen_ym}
 \end{align}
-\item \textbf{This can be obtained from our system given the following simplifying assumption.} Assume that the cortex does not move significantly during excitation, $y_C = y_C^{ss}$, leaving us with the new system of two equations:
+\item \textbf{This can be obtained from our system given the following simplifying assumption.} Assume that the variable, $y_C$ does not move significantly during excitation, $y_C = y_C^{ss}$, leaving us with the new system of two equations:
 \begin{align}
 \dfrac{\partial a}{ \partial t}  & =  \dfrac{c^{ss}}{1+c^{ss}} \mbox{exp}\left(-\dfrac{y-y_C^{ss}}{D}\right) - a \mbox{exp} \left(\dfrac{y-y_C^{ss}}{F} \right)\label{eq::a_ODE}\\
 0 & = -a(y - y_C^{ss}) + P (1-y) + \gamma_M \dfrac{\partial^2 y}{\partial x^2}\label{eq::yM_eq}
 \end{align} 
 \end{enumerate}
-We derive a necessary condition for this system (C) here. A travelling wave solution to this system is shown in Fig.~\ref{fig::A_wave}.
+
+We derive a necessary condition for this system (C) here. 
+\subsection{Numerical observation of travelling waves} Numerically, we observe a travelling wave solution  to the system described by (D) and is shown in Fig.~\ref{fig::A_wave}.
 \begin{figure}[h]
 \centering
 \captionsetup{width=.9\linewidth}
@@ -37,6 +39,7 @@ We derive a necessary condition for this system (C) here. A travelling wave solu
 \label{fig::A_wave}
 \end{figure}
 
+\subsection{Transformation to $z$ coordinate and derivation of non-local Maxwell condition} 
 We assume, WLOG, that Eq.~\ref{eq::gen_a} has two stable roots which we will denote by $(y^{+},a^{+})$ and $ (y^{-},a^{-})$.
 Transform to wave coordinate $z = x-vt$ and~\ref{eq::gen_a} and~\ref{eq::gen_ym} become:
 \begin{align}
@@ -97,4 +100,29 @@ The integral on the LHS is of determined sign (-).  Therefore, the Nonlocal Maxw
 & NLMC <0 \Rightarrow v \text{ does not exist, stationary solution}
 \end{align*}
 Note that only the second line (necessity) is shown here. The first line (sufficiency) is supported by numerical evidence below.
+
+\subsection{Numerical Results}
+
+
+After we hold $c$ and $y_C$ constant, we end up with a single PDE. Dropping the spatial term, and analyzing the single ODE we find that the ODE is can be monostable low, in which case the only solution is $0$, monostable high, in which case there is a single steady state solution $\ne 0$ or it can be bistable. See Fig.~\ref{fig::phaseline} for a plot of the single ODE in the various regimes. 
+\begin{figure}[h]
+\centering
+\captionsetup{width=0.9\linewidth}
+\includegraphics[width=4.5in]{Project2/figs/phaseline.pdf}
+\caption{Plot of da/d$t$ vs a for four different parameter sets. A) The monostable zero case, $\Omega = 57$ and $F = 0.95$. B) The bistable ODE-travelling PDE regime, $\Omega = 55$ and $F = 1.2$. C) The  bistable ODE-stationary PDE regime, $\Omega =50 $ and $F = 1.4$. D) The monostable high case,  $\Omega = 45$ and $F = 1.55$.}
+\label{fig::phaseline}
+\end{figure}
+
+\hspace{6pt}
+
+The non-local Maxwell condition is equal to $0$ in both of the monostable regimes (because $y^- = y^+$), but can be negative or positive in the bistable regime. Returning to the PDE, we don't expect travelling solutions to arise from a monostable regime, but we wish to see for which region of the bistable regime the non-local Maxwell condition predicts travelling solutions. By varying two parameters continuously we can determine these regions. This is shown in Fig.~\ref{fig::NLMC}(A). Here the parameters varied are $\Omega$ which is not present in the single PDE but changes are reflected in $c^{ss}$, and $F$. We plan to create identical plots using other pairs of parameters. The regions shown in Fig.~\ref{fig::NLMC} (A) match up well with the numerical solutions of the PDE as depicted in Eq.~\ref{fig::NLMC} (B), which shows the velocity of the travelling wave solution ($=0$ for a stationary solution).
+
+
+\begin{figure}[h]
+\centering
+\captionsetup{width=.9\linewidth}
+\includegraphics[width=6in]{Project2/figs/MM_results.pdf}
+\caption{(A)The results of varying two parameters $\Omega$ and $F$ and the regions where the non-local Maxwell condition is either greater than $0$ (yellow) or less that $0$ (blue). Red lines indicate the boundaries between the monostable and bistable regimes. The pink stars correspond to locations in parameter space where the corresponding phaseline plots of Fig.~\ref{fig::phaseline} were made.  (B) Velocity resulting from numerical solutions of the PDE as two parameters are varied. Red lines indicate the boundaries between the monostable and bistable regimes, as well as the line across which the non-local Maxwell condition is equal to $0$.}
+\label{fig::NLMC}
+\end{figure}
 

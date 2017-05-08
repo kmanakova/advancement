@@ -222,6 +222,90 @@ The system is solved in a square computational domain $[-200,200]^2$. The domain
 
 We use the implicit second order Crank-Nicholson scheme for time discretization in \cref{eq:a,eq:c}. Spatial derivatives are discretized using central difference approximations. \cref{eq:ym} is reformulated as a system of two second order equations. Block structured Cartesian refinement is used to efficiently resolve the multiple spatial scales. In particular, the mesh is refined in regions with large spatial gradients of $Y_M$ (typically around the bleb). The equations at implicit time level are solved by the adaptive nonlinear multigrid method developed in \cite{wise07}.
 
+
+
+\section{Nuclear blebs}
+\label{sec:project2}
+
+\subsection{Non-dimensionalization}
+{\bf Characteristic scales}
+
+\[ \begin{array}{ll} 
+a^c = b_{tot}/\mathcal{L}_0 \\
+b^c = b_{tot}/\mathcal{L}_0\\
+a_{nuc}^c = \frac{k_{off}^{0b}}{k_{on}^b} \frac{b_{tot}}{\mathcal{L}_0} \frac{\mathcal{L}_0^2}{4 \pi}\\[7pt]
+b_{nuc}^c = \frac{k_{off}^{0b}}{k_{on}^b} \frac{b_{tot}}{\mathcal{L}_0} \frac{ \mathcal{L}_0^2}{4 \pi}\\
+t^c = 1/k_{off}^{0b}\\
+s^c = \mathcal{L}_0/(2\sqrt{\pi})\\
+\mathcal{E}^c = \mathcal{G}_b(b^c) \mathcal{L}_0/(2\sqrt{\pi})\\
+\end{array}\]
+
+Let 
+\[ \begin{array}{ll}
+A = a/a^c\\
+B = b/b^c\\
+A_{nuc} = a_{nuc}/a_{nuc}^c\\
+B_{nuc} = b_{nuc}/b_{nuc}^c\\
+\tau = t/t^c\\
+S = s/s^c\\
+\vec{\chi} = \vec{x} /s^c \\
+E = \mathcal{E}/\mathcal{E}^c
+\end{array}\]
+
+Then
+
+\[ \begin{array}{rl}
+\dfrac{\partial A}{\partial \tau} &= \dfrac{\mathcal{L}_0 }{b_{tot}k_{off}^{0b}} \left (\dfrac{k_{on}^a}{\mathcal{A}(t)} A_{nuc} \dfrac{k_{off}^{0b}}{k_{on}^b} \dfrac{b_{tot}}{\mathcal{L}_0} \dfrac{\mathcal{L}_0^2}{4 \pi} - k_{off}^a (s,b)A \dfrac{b_{tot}}{\mathcal{L}_0} \right)= \dfrac{k_{on}^a}{k_{on}^b}\dfrac{\mathcal{L}_0^2}{4 \pi \mathcal{A}(t)} A_{nuc}  - \dfrac{k_{off}^a (s,b)}{k_{off}^{0b}}A  \\[15pt]
+
+\dfrac{\partial B}{\partial \tau} &= \dfrac{\mathcal{L}_0 }{b_{tot}k_{off}^{0b}} \left(\dfrac{k_{on}^b}{\mathcal{A}(t)}B_{nuc}\dfrac{k_{off}^{0b}}{k_{on}^b} \dfrac{b_{tot}}{\mathcal{L}_0} \dfrac{\mathcal{L}_0^2}{4 \pi} - k_{off}^b  (s,a)B  \dfrac{b_{tot}}{\mathcal{L}_0} \right)= \dfrac{ \mathcal{L}_0^2}{4 \pi \mathcal{A}(t)} B_{nuc}  - \dfrac{k_{off}^b (s,b)}{k_{off}^{0b}}B \\[10pt]
+
+
+ \rightarrow &\text{let } \textcolor{red}{\kappa_{on} = \dfrac{k_{on}^a}{k_{on}^b}, \lambda(\tau) = \dfrac{4 \pi \mathcal{A}(t)}{\mathcal{L}_0^2}, \phi_A(S,B) = \dfrac{\Phi_a(S,B)}{k_{off}^{0b}}, \phi_B(S,A) = \dfrac{\Phi_b(S,A)}{k_{off}^{0b}}, \kappa_{off} = \dfrac{k_{off}^{0a}}{k_{off}^{0b}}}\\
+
+\Rightarrow \dfrac{\partial A}{\partial \tau} &= \kappa_{on}\dfrac{1}{\lambda (\tau)} A_{nuc}  - (\kappa_{off}+ \phi_A (S,B)) A,  \\[10pt]
+\dfrac{\partial B}{\partial \tau} &= \dfrac{1}{\lambda (\tau)} B_{nuc}  - (1+ \phi_B (S,A)) B  \\[10pt]
+
+\end{array}\]
+
+And
+\[ \begin{array}{rl}
+E  &=  \dfrac{\mathcal{E}_{stretch} + \mathcal{E}_{pressure} + \mathcal{E}_{bending} + \mathcal{E}_{cytoskeleton} + k_B\mathcal{T}  \xi}{\mathcal{G}_b(b^c) \mathcal{L}_0/(2\sqrt{\pi})}  \\[5pt]
+
+E_{stretch} &= \dfrac{\displaystyle \int_0^{\mathcal{L}_0} \dfrac{1}{2} (\mathcal{G}_a(a(s)) +\mathcal{G}_b(b(s)) )\left( \left |\left| \dfrac{\partial \vec{x} }{\partial s} \right|\right| - 1\right)^2 ds}{\mathcal{G}_b(b^c)\mathcal{L}_0/(2\sqrt{\pi})} \\[10pt]
+
+&= \dfrac{\displaystyle \int_0^{2 \sqrt{\pi}} \dfrac{1}{2} (\mathcal{G}_a(A(S)a^c) +\mathcal{G}_b(B(S)b^c) )\left( \left |\left|  \dfrac{\partial \vec{\chi} }{\partial S} \right|\right| - 1\right)^2 \dfrac{\mathcal{L}_0}{2\sqrt{\pi}} dS}{\mathcal{G}_b(b^c) \mathcal{L}_0/(2\sqrt{\pi})} \\[10pt]
+
+ & \textcolor{red}{\text{let } G_A(A(S)) = \dfrac{ \mathcal{G}_a(A(S)a^c)}{\mathcal{G}_b(b^c)}, G_B(B(S)) = \dfrac{ \mathcal{G}_b(B(S)b^c) }{\mathcal{G}_b(b^c)}}\\
+ 
+\Rightarrow E_{stretch} &= \displaystyle \int_0^{2 \sqrt{\pi}} \dfrac{1}{2} (G_A(A(S))+ G_B(B(S)))\left( \left |\left|  \dfrac{\partial \vec{\chi} }{\partial S} \right|\right| - 1\right)^2  dS \\[10pt]
+ 
+E_{pressure}  &= \dfrac{\mathcal{P} \left( \dfrac{\lambda(\tau)}{\lambda_0} -1\right)^2}{\mathcal{G}_b(b^c)) \mathcal{L}_0/(2\sqrt{\pi})}  = \Pi \left(\dfrac{\lambda(\tau)}{\lambda_0} -1\right)^2 \\[10pt]
+
+ & \textcolor{red}{\text{where } \lambda_0 = \dfrac{4 \pi \mathcal{A}_0}{\mathcal{L}_0^2},\text{and let } \Pi = \dfrac{\mathcal{P} }{\mathcal{G}_b(b^c)) \mathcal{L}_0/(2\sqrt{\pi})}}\\[10pt]
+ 
+E_{bending} &= \dfrac{\displaystyle\int_0^{\mathcal{L}_0} \dfrac{1}{2 } (\mathcal{M}_a(a(s)) + \mathcal{M}_b (b(s)) \left|\left| \dfrac{\partial^2 \vec{x}}{\partial s^2} \right|\right|^2 ds}{\mathcal{G}_b(b^c) \mathcal{L}_0/(2\sqrt{\pi})}\\[10pt]
+
+&= \dfrac{\displaystyle\int_0^{2\sqrt{\pi}} \dfrac{1}{2 } (\mathcal{M}_a(A(S)a^c) + \mathcal{M}_b (B(S)b^c) \left|\left| \dfrac{2 \sqrt{\pi}}{\mathcal{L}_0}\dfrac{\partial^2 \vec{\chi}}{\partial S^2} \right|\right|^2 \dfrac{\mathcal{L}_0}{2\sqrt{\pi}} dS}{\mathcal{G}_b(b^c) \mathcal{L}_0/(2\sqrt{\pi})}\\[10pt]
+
+& \textcolor{red}{\text{let } M_A(A(S))= \dfrac{ 4 \pi \mathcal{M}_a(A(S)a^c) }{\mathcal{G}_b(b^c)\mathcal{L}_0^2}, M_B(B(S)) = \dfrac{ 4 \pi \mathcal{M}_b(B(S)b^c) }{\mathcal{G}_b(b^c)\mathcal{L}_0^2}}\\
+\Rightarrow E_{bending} &= \displaystyle\int_0^{2\sqrt{\pi}} \dfrac{1}{2 } (M_A(A(S))+ M_B(B(S)))\left|\left| \dfrac{\partial^2 \vec{\chi}}{\partial S^2} \right|\right|^2 dS\\[10pt]
+ 
+E_{cytoskeleton} &= \dfrac{\displaystyle\int_0^{\mathcal{L}_0} \mathcal{F}_{cyto} (a(s))\Theta (\theta) || \vec{x} || ds}{\mathcal{G}_b(b^c) \mathcal{L}_0/(2\sqrt{\pi})} \\[10pt]
+
+&= \dfrac{\displaystyle\int_0^{2\sqrt{\pi}} \mathcal{F}_{cyto} (A(S)a^c)\Theta (\theta) \left|\left| \dfrac{\mathcal{L}_0}{2\sqrt{\pi}}\vec{\chi} \right|\right| \dfrac{\mathcal{L}_0}{2\sqrt{\pi}} dS}{\mathcal{G}_b(b^c) \mathcal{L}_0/(2\sqrt{\pi})} \\[10pt]
+& \textcolor{red}{\text{let } F_{cyto}(A(S)) = \dfrac{\mathcal{F}_{cyto} (A(S)a^c)\mathcal{L}_0}{2\sqrt{\pi}\mathcal{G}_b(b^c)}}\\
+\Rightarrow E_{cytoskeleton} &= \displaystyle\int_0^{2\sqrt{\pi}} F_{cyto}(A(S))\Theta (\theta) \left|\left| \vec{\chi} \right|\right| dS\\
+
+ & \textcolor{red}{\text{let } k_B T = \dfrac{k_B\mathcal{T}}{\mathcal{G}_b(b^c) \mathcal{L}_0/(2\sqrt{\pi})}} \\[10pt]
+ 
+ \Rightarrow E &= E_{stretch} + E_{pressure}  + E_{bending}  + E_{cytoskeleton}  + k_BT \xi\\
+
+
+
+\end{array}\]
+
+
+
 %%% Local Variables: ***
 %%% mode: latex ***
 %%% TeX-master: "thesis.tex" ***

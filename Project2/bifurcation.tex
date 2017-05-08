@@ -1,8 +1,6 @@
-\section{Aim2: Bifurcation analysis}
+\section{ODE Analysis}
 
-As previously mentioned, the ODE system obstained by removing the spatial term in equation {\color{red}[REFERENCE] } exhibit a variety of behaviours numerically (Fig. ~\ref{fig::odeanal}). We intend to perform a two parameter bifurcation analysis in the parameters $\epsilon$ and $\Omega$. As shown in Fig. ~\ref{fig::epsomega}, by varying these two parameters we can watch the system transition between the different states. The resulting bifurcation diagram might look something like Fig. ~\ref{fig::bifplot}. Note that we see a classic canard explosion along the line transition between {\color{red}[put two states here }  which is a feautre of these type of fast-slow dynamical systems.
-
-
+The ODE system obtained by removing the spatial term in equation ~\ref{eq::nondimyM} can exhibit a variety of behaviours numerically (Fig. ~\ref{fig::odeanal}). 
 \begin{figure}[h]
 \centering
 \captionsetup{width=\linewidth}
@@ -11,6 +9,8 @@ As previously mentioned, the ODE system obstained by removing the spatial term i
 \label{fig::odeanal}
 \end{figure}
 
+We swept through two parameters, $\epsilon$ and $\Omega$, in order to study the transitions between these behaviours, see Fig. ~\ref{fig::epsomega}. We note that the oscillatory behaviours of the ODE system is dependent on the fast-slow dynamics established by small values of $\epsilon$. The second transition into the oscillating regime, along decreasing values of $\Omega$,  occurs in conjuction with a canard explosion, as the system seem to jump from a single steady state solution to large amplitude oscillations with a small change in the parameter. This is a known feature exhibited by somefast-slow dynamical systems[REFERENCE].
+
 \begin{figure}[h]
 \centering
 \captionsetup{width=\linewidth}
@@ -18,7 +18,8 @@ As previously mentioned, the ODE system obstained by removing the spatial term i
 \caption{two parameter bif.}
 \label{fig::epsomega}
 \end{figure}
-
+ 
+ We plan to do a two parameter bifurcation analysis to characterize the bifurcation lines and further explore the so-called {\textit{canard}} point at which the oscillations appear to jump. The resulting bifurcation diagram might look something like Fig. ~\ref{fig::bifplot}. 
 
 \begin{figure}[h]
 \centering
@@ -28,11 +29,3 @@ As previously mentioned, the ODE system obstained by removing the spatial term i
 \label{fig::bifplot}
 \end{figure}
 
-
-\begin{figure}[h]
-\centering
-\captionsetup{width=\linewidth}
-\includegraphics[width=4.5in]{Project2/figs/canard.pdf}
-\caption{Canard.}
-\label{fig::canard}
-\end{figure}

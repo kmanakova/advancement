@@ -1,2 +1,125 @@
 \section{Model}
-We developed a model which consists of 2 dynamic variables representing the line density of Lamin A/C and Lamin B as functions of time, $t$ on a simple closed curve in 2D, enclosing an area, $A(t)$ . The details of LaminA/C (B)  assembly and dissassembly into the lamina are unknown, we assume 
+
+\subsection{Statement of the model} We developed a model which consists of 2 dynamic variables representing the line density of Lamin A/C,$a(t)$, and Lamin B ,$b(t)$,as functions of time, $t$ on a simple closed curve in 2D, $s(t)$, enclosing an area, $\mathcal{A}(t)$ . The details of LaminA/C (B)  assembly and dissassembly into the lamina are unknown, we assume usual assembly kinetics and allow for possible feedback in the dissassembly terms. The resulting equations are:
+
+\begin{align}
+\dfrac{\partial a}{\partial t} = \dfrac{k_{on}^a}{\mathcal{A}(t)} a_{nuc} - k_{off}^a (s,b)a\\[7pt]
+\dfrac{\partial b}{\partial t} = \dfrac{k_{on}^b}{\mathcal{A}(t)}b_{nuc} - k_{off}^b  (s,a)b \label{eq::laminaKinetics}
+\end{align}
+
+The parameters $k_{on}^a , k_{on}^b$  govern assembly of lamin A/C, and lamin B into the lamina, respectfully, and assumes there is a pool of nuclear lamin [REFERENCE] which exchanges with the lamina. We therefore have the following conservation of lamin equations
+
+\begin{align}
+a_{tot}= \int_0^{\mathcal{L}_0} a(s,t) ds + a_{nuc}\\
+b_{tot} = \int_0^{\mathcal{L}_0} b(s,t) ds + b_{nuc}
+\end{align}
+
+Here, $k_{off}^a (s,b) = k_{off}^{0a} + \Phi_a(s,b)$ and $ k_{off}^b(s,a)  = k_{off}^{0b} + \Phi_b(s,a)$ functions describe laminar turnover with possible feedback terms arising from $\Phi$.
+
+These equations are coupled to a mechanical description of the lamina via the energy functional:
+
+
+\begin{align}
+\mathcal{E} = \mathcal{E}_{stretch} + \mathcal{E}_{pressure} +\mathcal{E}_{bending} + \mathcal{E}_{cytoskeleton} + k_B\mathcal{T} \xi
+\end{align}
+
+Where 
+\begin{align}
+\mathcal{E}_{stretch} = \displaystyle \int_0^{\mathcal{L}_0} \dfrac{1}{2} (\mathcal{G}_a(a(s)) +\mathcal{G}_b(b(s)) )\left( \left |\left| \dfrac{\partial \vec{x} }{\partial s} \right|\right| - 1\right)^2 ds \\
+\mathcal{E}_{pressure}  = \mathcal{P} \left( \dfrac{\mathcal{A}}{\mathcal{A}_0} -1\right)^2  \\
+\mathcal{E}_{bending} = \displaystyle\int_0^{\mathcal{L}_0} \dfrac{1}{2 } (\mathcal{M}_a(a(s)) + \mathcal{M}_b (b(s)) \left|\left| \dfrac{\partial^2 \vec{x}}{\partial s^2} \right|\right|^2 ds\\
+\mathcal{E}_{cytoskeleton} = \displaystyle\int_0^{\mathcal{L}_0} \mathcal{F}_{cyto} (a(s))\Theta (\theta) || \vec{x} || ds 
+\end{align}
+
+where \[ \Theta (\theta) = \dfrac{e^{\cos(2\theta)/\sigma_{\rm VM }}}{\int_0^{ 2\pi} e^{\cos(2\theta)/\sigma_{\rm VM}}d \theta} \]
+
+
+The lamina is modeled as an elastic material where the first term, $\mathcal{E}_{stretch}$ corresponds to laminar surface tension. The next term, $\mathcal{E}_{pressure}$ is hydrostatic pressure from the nucleus possibly due to chromatin [REFERENCE]. The third term,$\mathcal{E}_{bending}$  is bending resistance terms due to lamin-lamin crosslinking. It is know that there are non-negligible forces produced by the cellular cytoskeleton(actin and microtubules) which act on the lamin via nuclear transmembrane proteins [REFERENCES] and so the fourth term, $\mathcal{E}_{cytoskeleton}$, is due to this. Finally we include a term for thermal fluctuations generalized to 2D, $k_B\mathcal{T} \xi$. 
+
+A complete list of parameter descriptions can be found in Table ~\ref{tab:nucmodelparameters}
+
+\begin{table}[t!]
+\caption{Mechanical parameters.}\centering \label{tab:nucmodelparameters} 
+\begin{tabular}{ c  l  l}
+\hline
+Symbol & Dimensions & Meaning \\
+\hline
+$\mathcal{G}_a $ & [pN]  & Stretch modulus associated with lamin A/C \\
+$\mathcal{G}_b$& [pN] & Stretch modulus associated with lamin B\\
+$\mathcal{P}$ & [pNnm] & Bulk modulus \\
+$\mathcal{A}_0$  & [nm$^2$ & Resting area of nucleus\\
+$\mathcal{M}_a$ & [pNnm$^2$] &  Bending modulus associated with lamin A/C\\
+$\mathcal{M}_b $ & [pNnm$^2$] &  Bending modulus associated with lamin B\\
+$\theta$ &  [rad] & Angle \\
+$\mathcal{F}_{cyto}$ & [$\frac{pN}{nm}$] & Force line density of the cytoskeleton (if negative --pull/ if positive --push)\\
+$\sigma_{\rm VM}$ & [dimensionless] & Concentration of distribution about angle $ \mu_1, \mu_2 $ respectfully\\
+\hline
+\end{tabular}
+\end{table}
+
+
+We non dimensionalized the system by choosing charateristics scales for length, time, energy and amount of lamin. The details of this non-dimensionalization procedure can be found in Appendix ~\ref{sec:project2}. The resulting system is
+
+
+\begin{align}
+\dfrac{\partial A}{\partial \tau} &= \kappa_{on}\dfrac{1}{\lambda (\tau)} A_{nuc}  - (\kappa_{off}+ \phi_A (S,B)) A,  \\[10pt]
+\dfrac{\partial B}{\partial \tau} &= \dfrac{1}{\lambda (\tau)} B_{nuc}  - (1+ \phi_B (S,A)) B  \\[10pt]
+\end{align}
+
+With Energy 
+\begin{align}
+ E = \displaystyle \int_0^{2 \sqrt{\pi}} \dfrac{1}{2} (G_A(A(S))+ G_B(B(S)))\left( \left |\left|  \dfrac{\partial \vec{\chi} }{\partial S} \right|\right| - 1\right)^2  dS + \Pi \left(\dfrac{\lambda(\tau)}{\lambda_0} -1\right)^2\\[10pt]
+ +\displaystyle\int_0^{2\sqrt{\pi}} \dfrac{1}{2 } (M_A(A(S))+ M_B(B(S)))\left|\left| \dfrac{\partial^2 \vec{\chi}}{\partial S^2} \right|\right|^2 dS\\[10pt]
++ \displaystyle\int_0^{2\sqrt{\pi}} F_{cyto}(A(S))\Theta (\theta) \left|\left| \vec{\chi} \right|\right| dS +k_BT \xi
+\end{align}
+
+A description of non dimensional variables can be found in Table ~\ref{tab:nondimvar} and parameters in Table ~\ref{tab:nondimpar}.
+
+\begin{table}[t!]
+\caption{Non-dimensionalized variable.}\centering \label{tab:nondimvar} 
+\begin{tabular}{ l  l}
+\hline
+Symbol  & Meaning \\
+\hline
+$A$ & Laminar non-dimensionalized density of Lamin A/C \\
+$B$ & Laminar non-dimensionalized density of Lamin B  \\
+$A_{nuc}$ & Nucleoplasmic lamin A/C \\
+$B_{nuc}$ & Nucleoplasmic lamin B\\
+$S$ & Non-dimesionalized position of the lamina\\
+$\lambda(\tau)$ & Non-dimesionalized area of nucleus\\
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[t!]
+\caption{Non-dimensionalized parameters.}\centering \label{tab:nondimpar} 
+\begin{tabular}{ l  l}
+\hline
+Symbol  & Meaning \\
+\hline
+$\kappa_{on}$ &  Non-dimesionalized rate constant associated with lamin A/C incorporation into the lamina\\
+$\kappa_{off}$ &  Non-dimesionalized rate constant associated with lamin A/C dissociation from the lamina\\
+$G_A$ & Non-dimensionalized stretch modulus associated with lamin A/C \\
+$G_B$ &  Non-dimensionalized stretch modulus associated with lamin B\\
+$\Pi$ &  Non-dimensionalized bulk modulus \\
+$\lambda_0$ & Resting non-dimensionalized area of nucleus\\
+$M_A$ & Non-dimensionalized bending modulus associated with lamin A/C\\
+$M_B$  & Non-dimensionalized bending modulus associated with lamin B\\
+$\theta$ & Angle   \\
+$F_{cyto}$ &  Non-dimensionalized force line density of the cytoskeleton (if negative --pull/ if positive --push) \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\subsection{Numerical implementation of the model}
+
+
+\subsection{Tuning the model}
+
+
+
+
+
+

@@ -19,7 +19,7 @@ Our minimal model, summarized schematically in Fig.~\ref{fig::schematic}, consis
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\paragraph{Assembly and turnover.}
+\subsection{Assembly and turnover.}
 %Cortex
 The cortex is an active, anisotropic poro-viscoelastic material \cite{Salbreux:2009fp,Hannezo:2015ba}. Since the molecular details of cortex assembly are still under investigation \cite{Bovellan:2014ka}, we assume simple first-order kinetics,
 \begin{align}
@@ -34,7 +34,7 @@ In stereotypical, pre-bleb conditions, the cortex is attached to the membrane vi
 \end{align}
 where $\kon$ and $\koff$ have units of $\nm^{-2} \s^{-1}$ and $\s^{-1}$, respectively, and $c_0$ is the cortex thickness at which adhesion assembly is half-maximal. The numerator $\kappa (y_M-y_C)$ follows from the assumption that adhesions collectively behave like springs with Hookean stiffness $\kappa$. Note that adhesion turnover $\koff\sim 2\s^{-1}$ \cite{Fritzsche:2014jw} is significantly faster than cortex turnover, leading to a separation of timescales we exploit.
 
-\paragraph{Mechanics.}
+\subsection{Mechanics.}
 The above equations describing assembly and disassembly kinetics are coupled to a mechanical description of the membrane and cortex via mechanical energy,
 \begin{align}
 E = \iint&\;   \mathcal{H}_1 + \mathcal{H}_M + \mathcal{H}_C \; dx_1 dx_2 \label{eq::energy}
@@ -68,7 +68,7 @@ where $y_M^0$ sets the characteristic distance at which pressure is significantl
 % membrane tension
 The dynamics of membrane tension are also under investigation \cite{BenFogelson:2014gx,Peukes:2014fw,Tinevez:2009bh,Weiner:2007gd,Allard:2012if}. Under the simplest assumption, membrane tension $\gamma_M$ is spatially uniform and constant in time. We use this as our base model, but also explore membrane tension that is spatially non-uniform and dynamically responding to local stretching/unruffling and cortex attachment in Results. 
 
-\paragraph{Preliminary analysis.}
+\subsection{Preliminary analysis.}
 Taking the variational derivative of Eq.~\ref{eq::energy} leads to force-balance equations on the cortex and membrane,
 \begin{align}
 0 &= + a \kappa (y_M-y_C) - \sigma_m c y_C + \sigma_m c\, w_C \nabla^2  y_C \label{eq::forceBalanceCortex}\\

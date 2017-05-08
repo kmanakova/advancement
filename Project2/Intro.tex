@@ -1,15 +1,26 @@
 \section{Introduction}
 
-The study of biomechanics coupled to chemical kinetics naturally leads to integro-PDEs. [REFERENCE]. Here we will show that our model used to study cellular blebbing behavior (see Chapter ~\ref{chap:cellbleb}) fall into this category. Since we believe a broad class of cellular behaviors obey similar mechanical constraints in conjunction with chemical dynamics, a study of the properties of these types of equations is a promising endeavor. In particular, we have chosen to investigate the travelling wave solutions of a particular class of equations arising in cellular biophysics, using our previously described cellular blebbing model as a test case. 
+The diffusion equation is used to described many scientific phenomena for decades and has more recently become very important to systems biology, in particular with respect to pattern development and the emergence of periodic structures from non-periodic sources during embryogenesis. [REFERENCE science article]. Because of it's long history and extensive applications, mathematical studies have revealed the conditions for various patterns to arise. The inclusion of biomechanics to chemical kinetic frameworks naturally leads to non-diffusion like PDEs. Here we will show that our model used to study cellular blebbing behavior (see Chapter ~\ref{chap:cellbleb}) falls into this category. We believe a broad class of cellular behaviors obey similar mechanical constraints in conjunction with chemical dynamics, and therefore a study of the properties of these types of equations is a promising endeavor, and we plan to do a thorough literature review as part of our future work to identify such systems. In particular, we have chosen to investigate the conditions allowing for travelling wave solutions of a particular class of equations arising in cellular biophysics, a property already established in reaction-diffusion systems and sometimes called the Maxwell condition.[(Britton, 1982, Mori et al., 2008) REFERENCE]. We seek an analog of the Maxwell condition for the bleb model, and similar non-local PDEs. We will use our previously described cellular blebbing model as a test case.\\
 
-The cellular blebbing model is described by the following dimensionless system
-
+\begin{enumerate}[label=(\Alph*)]
+\item \textbf{Ultimately, we are interested in a necessary and sufficient traveling wave condition for the general}
+\begin{align}
+\dfrac{\partial a}{ \partial t}  & =  f(a,y)\\
+0 & =g \left(a,y,\dfrac{\partial^2 y}{\partial x^2}\right).
+\end{align}
+We have not yet succeeded in this. 
+\item\textbf{The specific system we are interested in come from our cellular blebbing model and is}
 \begin{align}
 \dfrac{dc}{dt}  & =  \Omega a - c\label{eq::nondimc}\\
 \epsilon\dfrac{da}{ dt}  & =  \dfrac{c}{1+c} \mbox{exp}\left(-\dfrac{y-y_C}{D}\right) - a \mbox{exp} \left(\dfrac{y-y_C}{F} \right)\label{eq::nondima}\\
 0 & = a(y-y_C) - Mcy_C\label{eq::nondimyC}\\
 0 & = -a(y - y_C) + P (1-y) + \dfrac{\partial^2 y}{\partial x^2}\label{eq::nondimyM}
 \end{align}
+For a full discussion of the derivation of these equations, see Chapter ~\ref{chap:cellbleb}. We will show how (B) can be reduce to a special case of (A). 
+\end{enumerate}
 
-For a full discussion of the derivation of these equations, see Chapter ~\ref{chap:cellbleb}.
+
+
+
+
 
