@@ -1,20 +1,20 @@
 \section{Model}
 
-\subsection{Statement of the model} We developed a model which consists of 2 dynamic variables representing the line density of Lamin A/C,$a(t)$, and Lamin B ,$b(t)$,as functions of time, $t$ on a simple closed curve in 2D, $s(t)$, enclosing an area, $\mathcal{A}(t)$ . The details of LaminA/C (B)  assembly and dissassembly into the lamina are unknown, we assume usual assembly kinetics and allow for possible feedback in the dissassembly terms. The resulting equations are:
+\subsection{Statement of the model} We developed a model which consists of 2 dynamic variables representing the line density of lamin A/C, $a(t)$, and lamin B, $b(t)$, as functions of time, $t$ on a simple closed curve in 2D, $s(t)$, enclosing an area, $\mathcal{A}(t)$. The details of laminA/C (B)  assembly and dissassembly into the lamina are unknown, we assume usual assembly kinetics and allow for possible feedback in the dissassembly terms. It is know that lamin proteins are not confined to the nuclear lamina, but exist in the nucleoplasm where they may be `doing other things'. [REFERENCE] We will assume there is a pool of nuclear lamins which echanges dynamically with the lamina. The resulting equations are:
 
 \begin{align}
 \dfrac{\partial a}{\partial t} = \dfrac{k_{on}^a}{\mathcal{A}(t)} a_{nuc} - k_{off}^a (s,b)a\\[7pt]
 \dfrac{\partial b}{\partial t} = \dfrac{k_{on}^b}{\mathcal{A}(t)}b_{nuc} - k_{off}^b  (s,a)b \label{eq::laminaKinetics}
 \end{align}
 
-The parameters $k_{on}^a , k_{on}^b$  govern assembly of lamin A/C, and lamin B into the lamina, respectfully, and assumes there is a pool of nuclear lamin [REFERENCE] which exchanges with the lamina. We therefore have the following conservation of lamin equations
+The parameters $k_{on}^a , k_{on}^b$  govern assembly of lamin A/C, and lamin B into the lamina, respectfully. The functions $k_{off}^a (s,b) = k_{off}^{0a} + \Phi_a(s,b)$ and $ k_{off}^b(s,a)  = k_{off}^{0b} + \Phi_b(s,a)$ describe laminar turnover with possible feedback terms arising from $\Phi$. The nuclear pools of lamin A/C (B) are labelled by $a_{nuc} (b_{nuc})$. We therefore have the following conservation of lamin equations. 
 
 \begin{align}
 a_{tot}= \int_0^{\mathcal{L}_0} a(s,t) ds + a_{nuc}\\
 b_{tot} = \int_0^{\mathcal{L}_0} b(s,t) ds + b_{nuc}
 \end{align}
 
-Here, $k_{off}^a (s,b) = k_{off}^{0a} + \Phi_a(s,b)$ and $ k_{off}^b(s,a)  = k_{off}^{0b} + \Phi_b(s,a)$ functions describe laminar turnover with possible feedback terms arising from $\Phi$.
+
 
 These equations are coupled to a mechanical description of the lamina via the energy functional:
 
@@ -22,7 +22,6 @@ These equations are coupled to a mechanical description of the lamina via the en
 \begin{align}
 \mathcal{E} = \mathcal{E}_{stretch} + \mathcal{E}_{pressure} +\mathcal{E}_{bending} + \mathcal{E}_{cytoskeleton} + k_B\mathcal{T} \xi
 \end{align}
-
 Where 
 \begin{align}
 \mathcal{E}_{stretch} = \displaystyle \int_0^{\mathcal{L}_0} \dfrac{1}{2} (\mathcal{G}_a(a(s)) +\mathcal{G}_b(b(s)) )\left( \left |\left| \dfrac{\partial \vec{x} }{\partial s} \right|\right| - 1\right)^2 ds \\
@@ -31,10 +30,12 @@ Where
 \mathcal{E}_{cytoskeleton} = \displaystyle\int_0^{\mathcal{L}_0} \mathcal{F}_{cyto} (a(s))\Theta (\theta) || \vec{x} || ds 
 \end{align}
 
-where \[ \Theta (\theta) = \dfrac{e^{\cos(2\theta)/\sigma_{\rm VM }}}{\int_0^{ 2\pi} e^{\cos(2\theta)/\sigma_{\rm VM}}d \theta} \]
-
-
 The lamina is modeled as an elastic material where the first term, $\mathcal{E}_{stretch}$ corresponds to laminar surface tension. The next term, $\mathcal{E}_{pressure}$ is hydrostatic pressure from the nucleus possibly due to chromatin [REFERENCE]. The third term,$\mathcal{E}_{bending}$  is bending resistance terms due to lamin-lamin crosslinking. It is know that there are non-negligible forces produced by the cellular cytoskeleton(actin and microtubules) which act on the lamin via nuclear transmembrane proteins [REFERENCES] and so the fourth term, $\mathcal{E}_{cytoskeleton}$, is due to this. Finally we include a term for thermal fluctuations generalized to 2D, $k_B\mathcal{T} \xi$. 
+
+
+
+and \[ \Theta (\theta) = \dfrac{e^{\cos(2\theta)/\sigma_{\rm VM }}}{\int_0^{ 2\pi} e^{\cos(2\theta)/\sigma_{\rm VM}}d \theta} \]
+
 
 A complete list of parameter descriptions can be found in Table ~\ref{tab:nucmodelparameters}
 
@@ -52,7 +53,7 @@ $\mathcal{M}_a$ & [pNnm$^2$] &  Bending modulus associated with lamin A/C\\
 $\mathcal{M}_b $ & [pNnm$^2$] &  Bending modulus associated with lamin B\\
 $\theta$ &  [rad] & Angle \\
 $\mathcal{F}_{cyto}$ & [$\frac{pN}{nm}$] & Force line density of the cytoskeleton (if negative --pull/ if positive --push)\\
-$\sigma_{\rm VM}$ & [dimensionless] & Concentration of distribution about angle $ \mu_1, \mu_2 $ respectfully\\
+$\sigma_{\rm VM}$ & [dimensionless] & Concentration of distribution of cytoskeletal force\\
 \hline
 \end{tabular}
 \end{table}
@@ -115,8 +116,11 @@ $F_{cyto}$ &  Non-dimensionalized force line density of the cytoskeleton (if neg
 
 \subsection{Numerical implementation of the model}
 
+The model is implemented in Matlab by discretizing the 2D simple curved into a series of nodes connected by linear springs with an elastic modulus dependent on the amount of lamins at the two nodes it is connecting. We solve the ODE systems using forward Euler. The energy minimization is done using a Markov chain Monte Carlo method at each step forward in time. 
 
 \subsection{Tuning the model}
+
+Many of the mechanical parameters of the model are unknown because they are difficult to measure expeerimentally. We therefore have to tune the paramters in our model to physiological conditions. We did this by comparing them to a  
 \begin{figure}[h]
 \centering
 \captionsetup{width=.9\linewidth}
