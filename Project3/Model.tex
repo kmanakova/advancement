@@ -113,7 +113,7 @@ The model is implemented in Matlab by discretizing the 2D simple closed curve in
 
 \subsection{Tuning the model}
 
-Many of the mechanical parameters of the model are unknown because they are difficult or impossible to measure experimentally. We therefore have to tune the parameters in our model using some data. We used data from a series of experiments conducted on rat cardiomyocytes grown on fibronectin islands of various shapes and sizes as shown in Fig. \ref{fig::nancycells} [REFERENCE NANCY DREW PAPER]. The features we extracted from the images are cellular aspect ratio, F-actin OOP (a measure of the anisotropy in the F-actin network), nuclear eccentricity, nuclear area, nuclear perimeter. 
+Many of the mechanical parameters of the model are unknown because they are difficult or impossible to measure experimentally. We therefore have to tune the parameters in our model using some data. We used data from a series of experiments conducted on rat cardiomyocytes grown on fibronectin islands of various shapes and sizes as shown in Fig. \ref{fig::nancycells} [REFERENCE NANCY DREW PAPER]. The features we extracted from the images are cellular aspect ratio, F-actin OOP (a measure of the anisotropy in the F-actin network), nuclear eccentricity, nuclear area, and nuclear perimeter. 
 
 \begin{figure}[h]
 \centering
@@ -123,13 +123,13 @@ Many of the mechanical parameters of the model are unknown because they are diff
 \label{fig::nancycells}
 \end{figure}
 
-In order to extract information about the correlations between these features we plotted each against the others in a scatter plot matrix, see Fig. ~\ref{fig::scattermatrix}. From here we chose three patterns in the data to fit our model. We first chose a subset of the cell which have low F-actin OOP and tuned parameters to match the histograms of nuclear area and nuclear perimeter in both mean and standard deviation. This subset of cells was chosen so that we could assume isotropic cytoskeletal force and therefore set it to 0. Once these parameters were tuned (Fig. ~\ref{fig::histos}), we returned to the entire data set and tuned our model to match the eccentricity vs F-actin OOP plot, see Fig. ~\ref{fig::eccopp}. This gave us estimate of $F_{cyto}$ which is in fact a ratio of two dimensional quantities, $F_{cyto}$ and  $\mathcal{G}_b$. Since the traction force of actin has been measured experimentally, [REFERENCE] we were able backtrack and to obtain order of magnitude estimates for all our mechanical parameters. These estimates are summarized in Table ~\ref{tab:OoMest}.
+In order to extract information about the correlations between these features we plotted each against the others in a scatter plot matrix, see Fig. ~\ref{fig::scattermatrix}. While most of the data appear uncorrelated, there is a clear correlation between F-actin OOP and nuclear eccentricity (R$^2$ = 0.42), and other attributes suitable for fitting. Inparticular, we chose three patterns in the data to fit our model, nuclear area, nuclear perimeter and correlation between F-actin OOP and nuclear eccentricity. We first chose a subset of the cell which have low F-actin OOP and tuned parameters to match the histograms of nuclear area and nuclear perimeter in both mean and standard deviation. This subset of cells was chosen so that we could assume isotropic cytoskeletal force and therefore set it to 0. Once these parameters were tuned (Fig. ~\ref{fig::histos}), we returned to the entire data set and tuned our model to match the eccentricity vs F-actin OOP plot, see Fig. ~\ref{fig::eccopp}. This gave us estimate of $F_{cyto}$ which is in fact a ratio of two dimensional quantities, $F_{cyto}$ and  $\mathcal{G}_b$. Since the traction force of actin has been measured experimentally, [REFERENCE] we were able backtrack and to obtain order of magnitude estimates for all our mechanical parameters. These estimates are summarized in Table ~\ref{tab:OoMest}.
 
 \begin{figure}[h]
 \centering
 \captionsetup{width=.9\linewidth}
-\includegraphics[width=6in]{Project3/figs/Nancy_data.pdf}
-\caption{scattermatrix}
+\includegraphics[width=7in]{Project3/figs/Nancy_data.pdf}
+\caption{Matrix of scatter plots between features of the experimental data. Note that along the diagonal, the distributions of each feature are plotted. }
 \label{fig::scattermatrix}
 \end{figure}
 
@@ -145,7 +145,7 @@ In order to extract information about the correlations between these features we
 \begin{figure}[h]
 \centering
 \captionsetup{width=.9\linewidth}
-\includegraphics[width=.9\linewidth]{Project3/figs/EccentricityvsOOP.pdf}
+\includegraphics[width=7in]{Project3/figs/EccentricityvsOOP.pdf}
 \caption{finding F cyto}
 \label{fig::eccopp}
 \end{figure}
