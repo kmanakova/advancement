@@ -2,32 +2,42 @@
 
 
 
-As previosuly mentioned, we seek an analog of the Maxwell condition for the bleb model, and similar non-local PDEs. In the fast timescale, we have $c = c^{ss}$.  The dynamics of excitation are thus only governed by the $a$ equation. We will make progress on this by studying the following systems, from most general to most narrow.
-\begin{enumerate}[label=(\Alph*)]
-\item \textbf{Again, we are ultimately interested in a necessary and sufficient traveling wave condition for the general}
+We are seeking an analog of the Maxwell condition for the bleb model, and similar non-local PDEs. In the fast timescale, we have $c = c^{ss}$.  The dynamics of excitation are thus only governed by the $a$ equation. We will make progress on this by studying the following systems, from most general to most narrow.
+
+We are ultimately interested in a necessary and sufficient traveling wave condition for the general
 \begin{align}
 \dfrac{\partial a}{ \partial t}  & =  f(a,y)\\
 0 & =g \left(a,y,\dfrac{\partial^2 y}{\partial x^2}\right).
 \end{align}
 
-\item\textbf{Our specific system restricited to the fast timescale is}
+The specific system we are interested in come from our cellular blebbing model and is
+\begin{align}
+\dfrac{dc}{dt}  & =  \Omega a - c\label{eq::nondimc}\\
+\epsilon\dfrac{da}{ dt}  & =  \dfrac{c}{1+c} \mbox{exp}\left(-\dfrac{y-y_C}{D}\right) - a \mbox{exp} \left(\dfrac{y-y_C}{F} \right)\label{eq::nondima}\\
+0 & = a(y-y_C) - Mcy_C\label{eq::nondimyC}\\
+0 & = -a(y - y_C) + P (1-y) + \dfrac{\partial^2 y}{\partial x^2}\label{eq::nondimyM}
+\end{align}
+
+Our specific system restricted to the fast timescale is
 \begin{align}
 \dfrac{\partial a}{ \partial t}  & =  \dfrac{c^{ss}}{1+c^{ss}} \mbox{exp}\left(-\dfrac{y-y_C}{D}\right) - a \mbox{exp} \left(\dfrac{y-y_C}{F} \right)\label{eq::a_ODE}\\
 0 & = -a(y - y_C) + P (1-y) + \gamma_M \dfrac{\partial^2 y}{\partial x^2}\label{eq::yM_eq} \\
 0 & = a(y-y_C) - Mcy_C\label{eq::nondimyC2}.
 \end{align} 
 Note that since Eq.~\ref{eq::nondimyC2} is algebraic in $y_C$, we can eliminate it from the system, and (B) is indeed a special case of (A). 
-\item \textbf{A narrow version of the system is obtained if we assume the force balance equations are linear in $a$}
+
+A narrow version of the system is obtained if we assume the force balance equations are linear in $a$.
 \begin{align}
 \dfrac{da}{ dt}  & = f_1(y) - a f_2(y)\label{eq::gen_a}\\
 0 & = g_1(y) - ag_2(y) +  \dfrac{\partial^2 y}{\partial x^2}\label{eq::gen_ym}
 \end{align}
-\item \textbf{This can be obtained from our system given the following simplifying assumption.} Assume that the variable, $y_C$ does not move significantly during excitation, $y_C = y_C^{ss}$, leaving us with the new system of two equations:
+
+
+This can be obtained from our system given the following simplifying assumption. Assume that the variable, $y_C$ does not move significantly during excitation, $y_C = y_C^{ss}$, leaving us with the new system of two equations:
 \begin{align}
 \dfrac{\partial a}{ \partial t}  & =  \dfrac{c^{ss}}{1+c^{ss}} \mbox{exp}\left(-\dfrac{y-y_C^{ss}}{D}\right) - a \mbox{exp} \left(\dfrac{y-y_C^{ss}}{F} \right)\label{eq::a_ODE}\\
 0 & = -a(y - y_C^{ss}) + P (1-y) + \gamma_M \dfrac{\partial^2 y}{\partial x^2}\label{eq::yM_eq}
 \end{align} 
-\end{enumerate}
 
 We derive a necessary condition for this system (C) here. 
 \subsection{Numerical observation of travelling waves} Numerically, we observe a travelling wave solution  to the system described by (D) and is shown in Fig.~\ref{fig::A_wave}.
