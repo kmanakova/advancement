@@ -1,0 +1,31 @@
+\documentclass[11pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{Summary}
+\author{Kathryn Manakova}
+\date{}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+We are studying the coupling between biochemistry and biomechanics at the cellular/organelle level. While a lot of work has been done modelling both biochemical phenomena and biomechanical phenomena individually, less has at been done at the interface of the two. By studying biological systems which are highly mechanical in nature, we can use mathematical models to elucidate the mechanisms underlying the particular behaviours observed. Since this class of modelling is relatively new and uncommon, so are the resulting equations associated with it. We believe an in depth study of the properties of these equations is beneficial to many future  studies in the field of mathematical biophysics. Below are three projects aimed at these goals. 
+
+\section*{Project 1: Cellular Blebs.}
+Blebs are pressure driven cell protrusions implicated in cellular functions such as cell division, apoptosis, and cell motility including motility of protease inhibited cancer cells. Because of their mechanical nature, blebs inform us about general cell surface mechanics including membrane dynamics, pressure propagation throughout the cytoplasm, and the architecture and dynamics of the actin cortex. Mathematical models including detailed fluid dynamics have previously been used to understand bleb expansion. Here we develop mathematical models on longer timescales that recapitulate the full bleb life cycle, including both expansion and healing by cortex reformation in 2D and 3D, in terms of experimentally accessible biophysical parameters such as myosin contractility, osmotic pressure, and turnover of actin and ezrin. The model provides conditions under which blebbing occurs, and naturally gives rise to traveling blebs. The model predicts conditions under which blebs travel or remain stationary, and predict the bleb traveling velocity, a quantity that has remained elusive in previous models.  As previous studies have used blebs as reporters of membrane tension and pressure dynamics within the cell, we have used our system to investigate various pressure equilibration models and dynamic, non-uniform membrane tension to account for the shape of a traveling bleb. We also find that traveling blebs tend to expand in all directions unless otherwise constrained, suggesting the importance of cell surface heterogeneity. This work has been published in Biophysical Journal [Manakova et al. \textit{Cell surface mechanochemistry and the determinants of bleb formation, healing, and travel velocity.} Biophys J, 110 (2016), pp. 1636-1647].
+
+
+\section*{Project 2: Studying a class of integro-PDEs.}
+The types of equations which arise from this type of biomechanical modelling are often non-classical and therefore little is known about them in general. Here we seek to elucidate some features of one particular class of equations arising from our bleb model. An important element in our bleb model is the existence of travelling wave solutions. For some classical mathematical models, for example reaction-diffusion systems, the conditions allowing for travelling waves solutions are well established. This is not the case for our  non-diffusion-like system of equations and therefore we are studying the existence of travelling wave solution for our non-local class of models. We derive a necessary condition for the existence of travelling wave solution and demonstrate sufficiency numerically. As part of our future work, we plan to perform bifurcation analysis on our ODE system, obtained by removing spatial coupling, and characterize the transitions between the types of solutions. In particular, we believe that in fast-slow system exhibits a hopf bifurcation in conjunction with what is known as a canard explosion. Canard explosions are characterized by a sudden jump from a single steady state solution to large amplitude oscillations for very small changes int he bifurcation parameter. 
+
+\section*{Project 3: Nuclear Blebs.}
+An important application of these mechano-chemical models is to the identification of altered protein mechanics in disease states. Often diseases can be linked to a genetic mutation, but the specific effects that the mutation has on the gene product is much more difficult to resolve. We collaborate with the Grosberg and Zaragoza labs to study a mutation in LMNA gene which codes for the lamin A/C proteins. Lamin A/C proteins perform many functions in the nucleus, including localizing to the nuclear lamina, a network of proteins associated with the nuclear membrane which is thought to provide mechanical support to the nucleus. Patients with a mutated LMNA gene can suffer from a variety of disorders, collectively termed laminopathies. A common feature of all laminopathies is altered nuclear shape containing more bumps or "blebs." Nuclear blebs are also found in normal cells to some extent and a key step in learning about the mechanisms of the ensuing diseases is to understand how much nuclear defect is due to normal cell to cell variability and how much is due to the mutation. The underlying mechanism responsible for producing these nuclear defects is unknown. We developed a mathematical model of the nuclear lamina in 2D. We include mechanical properties such as surface tension, bending rigidity, and cytoskeletal forces. These laminar mechanical properties come from the mechanical properties of the lamin protein itself. Using this model we will explore various perturbations to the mechano-chemical properties of lamin to determine what is the specific defect in the lamin proteins of mutant LMNA patients.
+
+
+\end{document}  
