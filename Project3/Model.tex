@@ -28,8 +28,15 @@ Where
 \end{align}
 and \[ \Theta (\theta) = \dfrac{e^{\cos(2\theta)/\sigma_{\rm VM }}}{\int_0^{ 2\pi} e^{\cos(2\theta)/\sigma_{\rm VM}}d \theta} \]
 
-The lamina is modeled as an elastic material where the first term, $\mathcal{E}_{stretch}$ corresponds to laminar surface tension. The next term, $\mathcal{E}_{pressure}$ is the intranuclear pressure, possibly due to chromatin. The third term,$\mathcal{E}_{bending}$  is bending resistance terms due to lamin-lamin crosslinking. It is know that there are non-negligible forces produced by the cellular cytoskeleton(actin and microtubules) which act on the lamin via nuclear transmembrane proteins ~\cite{Haque2010} and so the fourth term, $\mathcal{E}_{cytoskeleton}$, is due to this. Finally we include a term for thermal fluctuations generalized to 2D, $k_B\mathcal{T} \xi$. 
+The lamina is modeled as an elastic material where the first term, $\mathcal{E}_{stretch}$ corresponds to laminar surface tension. The next term, $\mathcal{E}_{pressure}$ is the intranuclear pressure, possibly due to chromatin. The third term,$\mathcal{E}_{bending}$  is bending resistance terms due to lamin-lamin crosslinking. It is know that there are non-negligible forces produced by the cellular cytoskeleton(actin and microtubules) which act on the lamin via nuclear transmembrane proteins ~\cite{Haque2010} and so the fourth term, $\mathcal{E}_{cytoskeleton}$, is due to this. Finally we include a term for thermal fluctuations generalized to 2D, $k_B\mathcal{T} \xi$. A cartoon schematic of the model is shown in Fig. ~\ref{fig::model}.
 
+\begin{figure}[h]
+\centering
+\captionsetup{width=.9\linewidth}
+\includegraphics[width=4.5in]{Project3/figs/model_cartoon.pdf}
+\caption{model.}
+\label{fig::model}
+\end{figure}
 
 Several of the mechanical parameters are in fact functions of the amount local densities of laminar lamin proteins, thus connecting the mechanical properties of the lamina (and therefore the nucleus) to the mechanical properties of lamin. A complete list of parameter descriptions can be found in Table ~\ref{tab:nucmodelparameters}.
 
