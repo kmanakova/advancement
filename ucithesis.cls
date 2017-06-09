@@ -72,7 +72,7 @@
 	\end{center}
 	\vspace{1in}
 	\begin{flushright}
-		Potential Advancement Committee: \\
+		Advancement Committee: \\
 		\Committeechair, Chair \\
 		\Othercommitteemembers \\
 	\end{flushright}
