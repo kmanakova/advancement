@@ -7,14 +7,14 @@
 \dfrac{\partial b}{\partial t} = \dfrac{k_{on}^b}{\mathcal{A}(t)}b_{nuc} - k_{off}^b  (s,a)b \label{eq::laminaKinetics}
 \end{align}
 
-The parameters $k_{on}^a , k_{on}^b$  govern assembly of lamin A/C, and lamin B into the lamina, respectfully. The functions $k_{off}^a (s,b) = k_{off}^{0a} + \Phi_a(s,b)$ and $ k_{off}^b(s,a)  = k_{off}^{0b} + \Phi_b(s,a)$ describe laminar turnover with possible feedback terms arising from $\Phi$ to be explored in future work and will be further discussed in section ~\ref{sec:futurework}. The nuclear pools of lamin A/C (B) are labelled by $a_{nuc} (b_{nuc})$. We therefore have the following conservation of lamin equations. 
+The parameters $k_{on}^a , k_{on}^b$  govern assembly of lamin A/C, and lamin B into the lamina, respectfully. The functions $k_{off}^a (s,b) = k_{off}^{0a} + \Phi_a(s,b)$ and $ k_{off}^b(s,a)  = k_{off}^{0b} + \Phi_b(s,a)$ describe laminar turnover with possible feedback terms arising from $\Phi$ to be explored in future work and will be further discussed in Section ~\ref{sec:futurework}. The nuclear pools of lamin A/C (B) are labelled by $a_{nuc} (b_{nuc})$. We therefore have the following conservation of lamin equations:
 
 \begin{align}
 a_{tot}= \int_0^{\mathcal{L}_0} a(s,t) ds + a_{nuc}\\
 b_{tot} = \int_0^{\mathcal{L}_0} b(s,t) ds + b_{nuc}
 \end{align}
 
-These equations are coupled to a mechanical description of the lamina via the energy functional:
+Where $\mathcal{L}_0$ is the length of the perimeter of a nucleus.  These equations are coupled to a mechanical description of the lamina via the energy functional:
 
 \begin{align}
 \mathcal{E} = \mathcal{E}_{stretch} + \mathcal{E}_{pressure} +\mathcal{E}_{bending} + \mathcal{E}_{cytoskeleton} + k_B\mathcal{T} \xi
@@ -28,17 +28,17 @@ Where
 \end{align}
 and \[ \Theta (\theta) = \dfrac{e^{\cos(2\theta)/\sigma_{\rm VM }}}{\int_0^{ 2\pi} e^{\cos(2\theta)/\sigma_{\rm VM}}d \theta} \]
 
-The lamina is modeled as an elastic material where the first term, $\mathcal{E}_{stretch}$ corresponds to laminar surface tension. The next term, $\mathcal{E}_{pressure}$ is the intranuclear pressure, possibly due to chromatin. The third term,$\mathcal{E}_{bending}$  is bending resistance terms due to lamin-lamin crosslinking. It is know that there are non-negligible forces produced by the cellular cytoskeleton(actin and microtubules) which act on the lamin via nuclear transmembrane proteins ~\cite{Haque2010} and so the fourth term, $\mathcal{E}_{cytoskeleton}$, is due to this. Finally we include a term for thermal fluctuations generalized to 2D, $k_B\mathcal{T} \xi$. A cartoon schematic of the model is shown in Fig. ~\ref{fig::model}.
+The lamina is modeled as an elastic material where the first term, $\mathcal{E}_{stretch}$ corresponds to laminar surface tension. The next term, $\mathcal{E}_{pressure}$ is the intranuclear pressure, possibly due to chromatin. The third term,$\mathcal{E}_{bending}$  is bending resistance terms due to lamin-lamin crosslinking. It is known that there are non-negligible forces produced by the cellular cytoskeleton(actin and microtubules) which act on the lamins via nuclear transmembrane proteins ~\cite{Haque2010} and so the fourth term, $\mathcal{E}_{cytoskeleton}$, is due to this. Finally we include a term for thermal fluctuations generalized to 2D, $k_B\mathcal{T} \xi$. A cartoon schematic of the model is shown in Fig. ~\ref{fig::model}.
 
 \begin{figure}[h]
 \centering
 \captionsetup{width=.9\linewidth}
 \includegraphics[width=4.5in]{Project3/figs/model_cartoon.pdf}
-\caption{model.}
+\caption{Schematic diagram of the model including Lamin A/C/B desities, and the forces acting on the lamina.}
 \label{fig::model}
 \end{figure}
 
-Several of the mechanical parameters are in fact functions of the amount local densities of laminar lamin proteins, thus connecting the mechanical properties of the lamina (and therefore the nucleus) to the mechanical properties of lamin. A complete list of parameter descriptions can be found in Table ~\ref{tab:nucmodelparameters}.
+Several of the mechanical parameters are in fact functions of the local densities of laminar lamin proteins, thus connecting the mechanical properties of the lamina (and therefore the nucleus) to the mechanical properties of lamin. A complete list of parameter descriptions can be found in Table ~\ref{tab:nucmodelparameters}.
 
 \begin{table}[t!]
 \caption{Mechanical parameters.}\centering \label{tab:nucmodelparameters} 
@@ -66,7 +66,6 @@ We non dimensionalized the system by choosing characteristic scales for length, 
 \dfrac{\partial A}{\partial \tau} &= \kappa_{on}\dfrac{1}{\lambda (\tau)} A_{nuc}  - (\kappa_{off}+ \phi_A (S,B)) A,  \\[10pt]
 \dfrac{\partial B}{\partial \tau} &= \dfrac{1}{\lambda (\tau)} B_{nuc}  - (1+ \phi_B (S,A)) B  \\[10pt]
 \end{align}
-
 With Energy 
 \begin{align}
  E = \displaystyle \int_0^{2 \sqrt{\pi}} \dfrac{1}{2} (G_A(A(S))+ G_B(B(S)))\left( \left |\left|  \dfrac{\partial \vec{\chi} }{\partial S} \right|\right| - 1\right)^2  dS + \Pi \left(\dfrac{\lambda(\tau)}{\lambda_0} -1\right)^2\\[10pt]
@@ -126,11 +125,11 @@ Many of the mechanical parameters of the model are unknown because they are diff
 \centering
 \captionsetup{width=.9\linewidth}
 \includegraphics[width=4.5in]{Project3/figs/nancycells.pdf}
-\caption{Nancys cells ~\cite{Drew2016}.}
+\caption{Rat cardiomyocytes grown on fibronect islands of various shapes and sizes. ~\cite{Drew2016}.}
 \label{fig::nancycells}
 \end{figure}
 
-In order to extract information about the correlations between these features we plotted each against the others in a scatter plot matrix, see Fig. ~\ref{fig::scattermatrix}. While most of the data appear uncorrelated, there is a clear correlation between F-actin OOP and nuclear eccentricity (R$^2$ = 0.42), and other attributes suitable for fitting. Inparticular, we chose three patterns in the data to fit our model, nuclear area, nuclear perimeter and correlation between F-actin OOP and nuclear eccentricity. We first chose a subset of the cell which have low F-actin OOP and tuned parameters to match the histograms of nuclear area and nuclear perimeter in both mean and standard deviation. This subset of cells was chosen so that we could assume isotropic cytoskeletal force and therefore set it to 0. Once these parameters were tuned (Fig. ~\ref{fig::histos}), we returned to the entire data set and tuned our model to match the eccentricity vs F-actin OOP plot, see Fig. ~\ref{fig::eccopp}. This gave us estimate of $F_{cyto}$ which is in fact a ratio of two dimensional quantities, $F_{cyto}$ and  $\mathcal{G}_b$. Since the traction force of actin has been measured experimentally ~\cite{Kuo2012}, we were able backtrack and to obtain order of magnitude estimates for all our mechanical parameters. These estimates are summarized in Table ~\ref{tab:OoMest}.
+In order to extract information about the correlations between these features we plotted each against the others in a scatter plot matrix, see Fig. ~\ref{fig::scattermatrix}. While most of the data appear uncorrelated, there is a clear correlation between F-actin OOP and nuclear eccentricity (R$^2$ = 0.42), and other attributes suitable for fitting. In particular, we chose three patterns in the data to fit our model, nuclear area, nuclear perimeter and correlation between F-actin OOP and nuclear eccentricity. We first chose a subset of the cell which have low F-actin OOP and tuned parameters to match the histograms of nuclear area and nuclear perimeter in both mean and standard deviation. This subset of cells was chosen so that we could assume isotropic cytoskeletal force and therefore set it to 0. Once these parameters were tuned (Fig. ~\ref{fig::histos}), we returned to the entire data set and tuned our model to match the eccentricity vs F-actin OOP plot, see Fig. ~\ref{fig::eccopp}. This gave us estimate of $F_{cyto}$ which is in fact a ratio of two dimensional quantities, $\mathcal{F}_{cyto}$ and  $\mathcal{G}_b$. Since the traction force of actin has been measured experimentally ~\cite{Kuo2012}, we were able to back-calculate and to obtain order of magnitude estimates for all our mechanical parameters. These estimates are summarized in Table ~\ref{tab:OoMest}.
 
 \begin{figure}[h]
 \centering
@@ -153,7 +152,7 @@ In order to extract information about the correlations between these features we
 \centering
 \captionsetup{width=.9\linewidth}
 \includegraphics[width=7in]{Project3/figs/EccentricityvsOOP.pdf}
-\caption{finding F cyto}
+\caption{$F_{cyto}$ was obtained by mathcing the correlation between F-actin OOP and nuclear eccentricity observed experimentaly. }
 \label{fig::eccopp}
 \end{figure}
 
